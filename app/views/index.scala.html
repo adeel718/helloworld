@@ -1,14 +1,7 @@
-@(form: Form[Application.Login])
+@(message : String)
 
 @main("Login") {
-	@helper.form(routes.Application.index) {
-		@if(form.hasGlobalErrors) { 
-            <p class="error">
-                @form.globalError.message
-            </p>
-        }
-        
-		<input type="text" placeholder="Username"/>
+		<input type="text" name="username" placeholder="Username"/>
 		
 		<!--  
 		<div class="text">
@@ -20,5 +13,4 @@
 		
 			<h3 class="heading-24">How to use the design patterns</h3>
 		</div>-->
-	}
 }

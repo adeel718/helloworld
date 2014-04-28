@@ -9,15 +9,7 @@ import views.html.*;
 public class Application extends Controller {
 
     public static Result index() {
-        return ok(index.render(form(Login.class)));
+        return ok(index.render("test"));
     }
     
-    public static class Login {
-		public String userName;
-
-		public String validate() {
-			return null;
-		}
-	}
-
 }
