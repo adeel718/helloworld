@@ -7,7 +7,8 @@ libraryDependencies ++= Seq(
   javaEbean,
   cache,
   "org.mockito" % "mockito-core" % "1.9.5" % "test",
-  "org.jsoup" % "jsoup" % "1.7.3" % "test"
+  "org.jsoup" % "jsoup" % "1.7.3" % "test",
+  "org.seleniumhq.selenium" % "selenium-java" % "2.41.0"
 )     
 
 play.Project.playJavaSettings
