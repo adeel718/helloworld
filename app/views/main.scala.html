@@ -36,9 +36,7 @@
 					    <nav id="proposition-menu">
 					      <a href="https://www.gov.uk/service-manual" id="proposition-name">Hello World</a>
 					      <ul id="proposition-links">
-					        <li><a href="https://www.gov.uk/service-manual/digital-by-default" class="">Digital by Default Service Standard</a></li>
-					        <li><a href="https://www.gov.uk/service-manual/start" class="">Start using the manual</a></li>
-					        <li><a href="https://www.gov.uk/contact/govuk" class="">Feedback</a></li>
+					        <li><a href="http://localhost:9000/login" class="">Login</a></li>
 					      </ul>
 					    </nav>
 	  			</div>
@@ -50,18 +48,32 @@
     <div id="global-cookie-message">
 		<p>GOV.UK uses cookies to make the site simpler. <a href="https://www.gov.uk/help/cookies">Find out more about cookies</a></p>
     </div>
-
     
 	<div class="breadcrumb">
   		<nav role="navigation">
     		<ol>
-				<li><a href="https://www.gov.uk/service-manual">Home</a></li>
+				<li><a href="http://localhost:9000">Home</a></li>
 			</ol>
   		</nav>
 	</div>
 
 	<main id="wrapper" role="main">
-  		@content
+		<div id="content">
+   		<div class="grid-wrapper">
+     			<div class="grid">
+	       			<div class="inner-block">
+						<h1 class="heading-48">
+							<span class="heading-27"></span>
+							@title 
+							<span class="phase-block">
+	    						<span class="alpha">alpha</span>
+							</span>
+	         				</h1>
+	  						@content
+					</div><!-- /.inner-block -->
+				</div><!-- /.grid -->
+			</div><!-- /.grid-wrapper -->
+		</div>
 	</main>
 
     <footer class="group js-footer" id="footer" role="contentinfo">
@@ -86,7 +98,3 @@
     <div id="global-app-error" class="app-error hidden"></div>
   </body>
 </html>
-
-
-
-
