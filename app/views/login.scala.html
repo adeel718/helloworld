@@ -1,0 +1,13 @@
+@* login Template File *@
+@(username: String = "")
+
+@main(){
+    
+    @if(flash.contains("message")) {
+        @flash.get("message")
+    }
+    
+    <h1>Please sign in</h1>
+    
+    <input type="text" name="username" placeholder="User name here" value="@username">
+}
