@@ -9,6 +9,9 @@ import views.html.*;
 public class Application extends Controller {
 
     public static Result index() {
+    	User user = new User();
+    	user.setEmail("asgga@m.com");
+    	user.getEmail();
         return ok(index.render("test"));
     }
 
