@@ -1,15 +1,16 @@
 package controllers;
 
 import static org.junit.Assert.*;
+import static org.fest.assertions.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.Collections;
 import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Http.Context;
 import play.mvc.Http.Flash;
@@ -30,6 +31,7 @@ public class ApplicationControllerTest {
 //		System.out.println(result.getWrappedResult().toString());
 		String s = Helpers.contentAsString(result);
 		assertTrue((s).contains("Please sign in"));
+		assertOk(result);
 	}
 	
 	@Test
@@ -37,6 +39,7 @@ public class ApplicationControllerTest {
 		Result result =	Application.loginSubmit("Adeel");
 		String s = Helpers.contentAsString(result);
 		assertTrue((s).contains("Hello Adeel"));
+		assertOk(result);
 	}
 	
 	@Test
@@ -56,6 +59,12 @@ public class ApplicationControllerTest {
 		final String s = Helpers.contentAsString(result);
 		assertTrue(s.contains("value=\"" + username + "\""));
 		assertTrue((s).contains("Username should not be empty."));
+		assertThat(Helpers.status(result)).isEqualTo(Http.Status.BAD_REQUEST);
+	}
+	
+	private void assertOk(Result result) {
+		assertNotNull(result);
+		assertThat(Helpers.status(result)).isEqualTo(Http.Status.OK);
 	}
 	
 }

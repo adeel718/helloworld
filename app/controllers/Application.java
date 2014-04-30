@@ -22,7 +22,7 @@ public class Application extends Controller {
 	public static Result loginSubmit(String username) {
 		if(username.trim().isEmpty()) {
 			flash("message", "Username should not be empty.");
-			return ok(login.render(username));
+			return badRequest(login.render(username));
 		}
 
 		return ok(welcome.render(username));
