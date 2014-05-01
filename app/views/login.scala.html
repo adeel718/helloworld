@@ -4,8 +4,14 @@
 @main("Login"){
     
     @if(flash.contains("message")) {
-        @flash.get("message")
+		<div class="validation-summary">
+			<h1>Please check the form</h1>
+				<ul>
+					<li><a href="#error1">@flash.get("message")</a></li>
+				</ul>
+		</div>	
     }
+    
     
     <h1>Please sign in</h1>
     
@@ -13,6 +19,4 @@
     	@helper.inputText(user("userName"))
     	<input type="submit" name="submitBtn">
     }
-    
-    
 }

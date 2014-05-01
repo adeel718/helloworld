@@ -19,7 +19,7 @@ public class Application extends Controller {
 	public static Result loginSubmit() {
 		Form<User> form = form(User.class).bindFromRequest();
 		if(form.hasErrors() || form.hasGlobalErrors()) {
-			flash("message", "Username should not be empty.");
+			flash("message", "Please enter the user name field and it should not be blank");
 			return badRequest(login.render(form));
 		}
 		
