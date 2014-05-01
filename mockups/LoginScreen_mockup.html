@@ -7,16 +7,103 @@ URL: /login
 
 <hr>
 
-<h1>Please sign in</h1>
-<div>
-<p>
-<b style="color: red">Sample error message</b>
-<i>Error message area.</i>
-</p>
+<style>
+/* Valdation CSS - summary */
+.validation-summary {
+   border: 3px solid #df3034;
+   box-sizing: border-box;
+   padding: 1em 1em 0.25em 1em;
+   margin: 1em -1em 1.5em 0em;
+   background-color: #fef7f7;
+}
+
+.validation-summary *:first-child {
+   margin-top: 0em;
+}
+
+.validation-summary h1 {
+   margin-bottom: 0;
+}
+
+.validation-summary ul {
+   padding-left: 2.2em;
+   margin: 0.75em 0;
+}
+
+validation-summary ul, .validation-summary ol {
+  color: #df3034;
+}
+
+
+validation-summary ul li {
+  list-style-type: none;
+  list-style-image: none;
+}
+
+validation-summary li {
+  font-family: "nta",Arial,sans-serif;
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 300;
+  text-transform: none;
+}
+
+validation-summary a, .validation-summary a:visited {
+  color: #df3034;
+  text-decoration: none;
+}
+
+validation-summary a:hover {
+  color: #df3034;
+  text-decoration: underline;
+ }
+
+/* Valdation CSS - input fields */ 
+.validation {
+    background-color: #fef7f7;
+    border-left: 3px solid #df3034;
+    margin: 0 -1em 0.5em -1em;
+    padding: 0.75em 1em 1em 1em
+}
+
+.validation .validation-message {
+    color: #df3034;
+    font-family: "nta",Arial,sans-serif;
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: 300;
+    text-transform: none;
+    display: block;
+    padding-bottom: 0.5em
+}
+
+
+@media (max-width: 640px) {
+    .validation .validation-message {
+        font-size:14px;
+        line-height: 1.14286
+    }
+    
+}
+ 
+ 
+</style>
+
+<div class="validation-summary">
+<i>Summary error message area.</i>
+        <h1>Please check the form</h1>
+        <ul>
+          <li><a href="#error1">Please enter the user name field and it should not be blank</a></li>
+        </ul>
 </div>
 
-<p>
-Username: <input type="text" name="username" size="30" maxlength="30" placeholder="User name here">  *
+<h1>Please sign in</h1>
+
+<p class="validation">
+    <span><i>Input field error message area.</i></span>
+	<span id="error1" class="validation-message">Please enter the user name field and it should not be blank</span>
+	<label for="username">Username</label>
+	<input id="username" class="name" type="text" size="30" maxlength="30" placeholder="User name here"> *
 </p>
 <button>Reset</button>
 <button>Sign In</button>
@@ -24,13 +111,15 @@ Username: <input type="text" name="username" size="30" maxlength="30" placeholde
 <hr>
 <p>
 <i>
-Input a username, press ENTER key or push "Sign In" button - username submitted to server. 
+Input a username, press ENTER key or push "Sign In" button - username submitted to server.
+<br>
+Press "Reset" button - the input fields are reset to values initially rendered.
 <br>
 <br>
 Validation rules: username non empty (contains at least 1 visible character) 
 <br>
 Validation OK: show "Welcome screen" 
 <br>
-Validation Fails: show the same "Login screen" with username field populated from user input and error message <b style="color: red">Username should not be empty.</b>
+Validation Fails: show the same "Login screen" with username field populated from user input and error message <b style="color: red">Please enter the user name field and it should not be blank</b>
 </i>
 </p>
