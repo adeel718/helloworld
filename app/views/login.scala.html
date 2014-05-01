@@ -12,8 +12,20 @@
 		</div>	
     }
     
-    
     <h1>Please sign in</h1>
+    
+    @if(user.hasErrors){
+	<div class="validation-summary">
+		<h1>Please check the form</h1>
+		<ul>
+	     @for((_, errorsList) <- user.errors){
+	     	@for(error <- errorsList){
+	          <li><a href="#error1">@error.message</a></li>
+	     	}
+	     }
+		</ul>
+	</div>	
+	}
     
     @helper.form(routes.Application.loginSubmit) {
     	@helper.inputText(user("userName"))

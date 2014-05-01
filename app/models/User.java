@@ -12,7 +12,7 @@ public class User extends Model {
 	@Id
 	private int Id;
 
-	@Required
+	@Required(message="Please enter the user name field and it should not be blank")
 	@Formats.NonEmpty
 	private String userName;
 	

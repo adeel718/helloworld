@@ -74,7 +74,7 @@ public class ApplicationControllerTest {
 		final String s = Helpers.contentAsString(result);
 		assertTrue((s).contains("Please sign in"));
 		assertTrue(s.contains("value=\"" + username + "\""));
-		assertTrue((s).contains("Username should not be empty."));
+		assertTrue((s).contains("Please enter the user name field and it should not be blank"));
 		assertThat(Helpers.status(result)).isEqualTo(Http.Status.BAD_REQUEST);
 	}
 	
