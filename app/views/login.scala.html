@@ -1,7 +1,7 @@
 @* login Template File *@
-@(username: String = "")
+@(user: Form[User])
 
-@main(){
+@main("Login"){
     
     @if(flash.contains("message")) {
         @flash.get("message")
@@ -9,5 +9,10 @@
     
     <h1>Please sign in</h1>
     
-    <input type="text" name="username" placeholder="User name here" value="@username">
+    @helper.form(routes.Application.loginSubmit) {
+    	@helper.inputText(user("userName"))
+    	<input type="submit" name="submitBtn">
+    }
+    
+    
 }

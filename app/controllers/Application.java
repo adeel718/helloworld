@@ -3,28 +3,28 @@ package controllers;
 import static play.data.Form.form;
 import models.User;
 import play.*;
+import play.data.Form;
 import play.mvc.*;
 import views.html.*;
 
 public class Application extends Controller {
 
     public static Result index() {
-    	User user = new User();
-    	user.setEmail("asgga@m.com");
-    	user.getEmail();
-        return ok(index.render("test"));
+        return redirect(routes.Application.login());
     }
 
 	public static Result login() {
-        return ok(login.render(""));
+        return ok(login.render(form(User.class)));
 	}
 
-	public static Result loginSubmit(String username) {
-		if(username.trim().isEmpty()) {
+	public static Result loginSubmit() {
+		Form<User> form = form(User.class).bindFromRequest();
+		if(form.hasErrors() || form.hasGlobalErrors()) {
 			flash("message", "Username should not be empty.");
-			return badRequest(login.render(username));
+			return badRequest(login.render(form));
 		}
-
+		
+		String username = form.get().getUserName();
 		return ok(welcome.render(username));
 	}
     

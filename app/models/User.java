@@ -1,10 +1,14 @@
 package models;
 
 import play.data.validation.Constraints.Required;
+import javax.persistence.Id;
 import play.db.ebean.Model;
 
 public class User extends Model {
 	
+	@Id
+	private int Id;
+
 	@Required
 	private String userName;
 	
@@ -13,6 +17,14 @@ public class User extends Model {
 	private String firstName;
 	
 	private String lastName;
+	
+	public int getId() {
+		return Id;
+	}
+	
+	public void setId(int id) {
+		Id = id;
+	}
 	
 	public String getEmail() {
 		return email;
@@ -55,4 +67,15 @@ public class User extends Model {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	
+	public String validate()  {
+		if (userName.trim().equals("")){
+			return "Username should not be empty.";
+		}
+		else{
+			return null;
+		}
+		      	
+	}
+	 
 }
