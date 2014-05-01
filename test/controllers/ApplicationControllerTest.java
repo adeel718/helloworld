@@ -10,17 +10,16 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.stereotype.Controller;
 
 import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Http.Context;
 import play.mvc.Http.Flash;
-import play.mvc.Http.Request;
 import play.test.FakeRequest;
 import play.test.Helpers;
 
 public class ApplicationControllerTest {
+	
 	@Before
 	public void setUp() {
 		final Context ctx = mock(Context.class);
@@ -83,5 +82,17 @@ public class ApplicationControllerTest {
 		assertNotNull(result);
 		assertThat(Helpers.status(result)).isEqualTo(Http.Status.OK);
 	}
+	
+	////////////////////////////////////////////////////////////////////////////
+	
+	@Test
+	public void controllerShouldRedirectIndexToLogin() {
+		final Result result = Application.index();
+		
+		// index should redirect to /login
+		assertThat(Helpers.status(result)).isEqualTo(Http.Status.SEE_OTHER);
+		assertThat(Helpers.redirectLocation(result)).isEqualTo("/login");
+	}
+	
 	
 }

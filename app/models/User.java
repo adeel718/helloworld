@@ -1,7 +1,10 @@
 package models;
 
+import play.data.format.Formats;
 import play.data.validation.Constraints.Required;
+
 import javax.persistence.Id;
+
 import play.db.ebean.Model;
 
 public class User extends Model {
@@ -10,6 +13,7 @@ public class User extends Model {
 	private int Id;
 
 	@Required
+	@Formats.NonEmpty
 	private String userName;
 	
 	private String email;
@@ -67,15 +71,4 @@ public class User extends Model {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
-	public String validate()  {
-		if (userName.trim().equals("")){
-			return "Username should not be empty.";
-		}
-		else{
-			return null;
-		}
-		      	
-	}
-	 
 }
