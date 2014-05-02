@@ -14,7 +14,7 @@ import play.mvc.Result;
 import play.test.FakeRequest;
 import play.test.Helpers;
 
-public class ApplicationControllerTest {
+public class ApplicationControllerUnitTest {
 	
 	@Test
 	public void controllerShouldRenderLoginView() {
