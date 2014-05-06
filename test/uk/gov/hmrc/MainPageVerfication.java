@@ -12,7 +12,9 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class MainPageVerfication {
+import views.BaseSeleniumTest;
+
+public class MainPageVerfication extends BaseSeleniumTest {
 	WebDriver webDriver;
 	String vURL;
 
@@ -20,7 +22,7 @@ public class MainPageVerfication {
 	public void myBefore(){
 		webDriver = new FirefoxDriver();
 		webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		vURL = "localhost:9000/login";
+		vURL = "http://localhost:9000/login";
 	}
 	
 	@Test
@@ -28,7 +30,7 @@ public class MainPageVerfication {
 		webDriver.navigate().to(vURL);
 		
 		String verifyTextLinkExp = "GOV .UK";
-		String verifyTextLinkAct =webDriver.findElement(By.xpath(".//*[@id='logo']/span")).getText();
+		String verifyTextLinkAct = webDriver.findElement(By.id("logo")).getText();
 		assertEquals(verifyTextLinkExp, verifyTextLinkAct);
 		System.out.println("Expected: "+verifyTextLinkExp+ "-" +", Actual: "+ verifyTextLinkAct );
 		
@@ -59,8 +61,8 @@ public class MainPageVerfication {
 		assertEquals(verifyFootCopyRightLogoExp, verifyFootCopyRightLogoAct);
 		
 		
-		 String titleAct = "Please sign in ALPHA";
-	     String titleExp = webDriver.findElement(By.xpath(".//*[@id='content']/div/div/div/h1")).getText();
+	     String titleAct = webDriver.findElement(By.xpath(".//*[@id='content']/div/div/div/h1")).getText();
+	     String titleExp = "Please sign in ALPHA";
 	     assertEquals(titleExp,titleAct);
 	     
 	     String verifyUserNameLabelExp = "Username";
@@ -108,7 +110,7 @@ public class MainPageVerfication {
 	
 	@After
 	public void myAfter(){
-		webDriver.quit();
+		//webDriver.quit();
 		
 	}
 	
