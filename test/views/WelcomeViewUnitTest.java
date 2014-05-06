@@ -15,7 +15,7 @@ import org.junit.Test;
 import play.api.templates.Html;
 import play.mvc.Http.Context;
 
-public class WelcomeViewTest {
+public class WelcomeViewUnitTest {
 
 	@Test
 	public void welcomeViewShouldGreetUser() {
