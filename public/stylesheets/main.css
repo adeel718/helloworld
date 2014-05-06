@@ -69,3 +69,20 @@
     display: block;
     padding-bottom: 0.5em
 }
+
+/* Overide form elements from helpers */
+dl dt label {
+	float: left;
+	margin-right: 10px !important;
+}
+
+dl dd input {
+	width: 300px;
+	float: left;
+	margin-right: 10px;
+}
+
+.clear {
+	clear:both;
+}
+
