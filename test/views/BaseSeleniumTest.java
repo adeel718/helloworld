@@ -50,10 +50,10 @@ public class BaseSeleniumTest {
 	    System.out.println("Started firefox driver");
 	}*/
 
-	@After
-	public void tearDown() throws Exception {	
-		driver.quit();
-	}
+//	@After
+//	public void tearDown() throws Exception {	
+//		driver.quit();
+//	}
 
 	public String getBaseURL() {
 		return baseURL;
