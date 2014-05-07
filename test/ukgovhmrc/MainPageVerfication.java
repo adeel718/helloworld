@@ -1,4 +1,4 @@
-﻿package uk.gov.hmrc;
+﻿package ukgovhmrc;
 
 import static org.junit.Assert.*;
 
