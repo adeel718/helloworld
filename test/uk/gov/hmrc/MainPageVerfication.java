@@ -1,4 +1,4 @@
-package uk.gov.hmrc;
+﻿package uk.gov.hmrc;
 
 import static org.junit.Assert.*;
 
@@ -104,13 +104,13 @@ public class MainPageVerfication extends BaseSeleniumTest {
 		webDriver.navigate().back();
 	    assertEquals("Please sign in", webDriver.getTitle());
 	      
-//		webDriver.findElement(By.id("proposition-name")).click();
-//		assertTrue(webDriver.getCurrentUrl().endsWith(vURL));		      
+		webDriver.findElement(By.id("proposition-name")).click();
+		assertTrue(webDriver.getCurrentUrl().endsWith(vURL));		      
 	}
 	
 	@After
 	public void myAfter(){
-		//webDriver.quit();
+		webDriver.quit();
 		
 	}
 	

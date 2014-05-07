@@ -44,11 +44,11 @@ public class BaseSeleniumTest {
 		testServer.stop();
 	}
 	
-	@Before
+	/*@Before
 	public void setUp() throws Exception {			
 		driver = new FirefoxDriver();
 	    System.out.println("Started firefox driver");
-	}
+	}*/
 
 	@After
 	public void tearDown() throws Exception {	
