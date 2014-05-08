@@ -14,7 +14,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import views.BaseSeleniumTest;
 
-public class MainPageVerification extends BaseSeleniumTest {
+public class MainPageVerificationSeleniumTest extends BaseSeleniumTest {
 	WebDriver webDriver;
 	String vURL;
 
