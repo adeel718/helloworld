@@ -1,6 +1,8 @@
 @* login Template File *@
 @(user: Form[User])
 
+@username = @{user("userName")}
+
 @main("Please sign in"){
     
     @if(user.hasErrors){
@@ -17,8 +19,6 @@
 	}
     
     @helper.form(routes.Application.loginSubmit) {
-        
-        @defining(user("userName")) { username =>
          <div @if(username.error.isDefined) { class="validation" }>
          @username.error.map{ e => 
             <span id="error1" class="validation-message">@e.message</span>
@@ -31,7 +31,7 @@
              '_showErrors -> false
              )
           </div>
-        }
+        
         <div class="clear"/>
         <br/> 
         <input type="reset" name="resetBtn"/>
