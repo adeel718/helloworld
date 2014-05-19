@@ -85,6 +85,7 @@ class ScalaControllerJUnitTest extends AssertionsForJUnit {
   @Before
   def setUp = {
     import scala.concurrent.duration._
+    import scala.language.postfixOps
 	timeout = Timeout(1 seconds)
   }
   
@@ -105,6 +106,7 @@ class ScalaControllerJUnitTest extends AssertionsForJUnit {
 private object TestHelper {
 
   import scala.concurrent.duration._
+  import scala.language.postfixOps
   implicit val timeout = Timeout(1 seconds)
   
   def invokeIndexOnController = {
