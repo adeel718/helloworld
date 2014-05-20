@@ -10,3 +10,7 @@ POST     /login                      controllers.Application.loginSubmit()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+# Register page
+GET     /register                      controllers.UserRegistration.index()
+POST     /register                     controllers.UserRegistration.submitUserRegistration()

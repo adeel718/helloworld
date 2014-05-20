@@ -9,6 +9,9 @@ import play.api.templates.Html
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import views.html._
+import play.api.data.Form
+import play.api.data.Forms._
+import models.Registration
 
 /**
  * Created by user02 on 5/20/14.
@@ -18,8 +21,11 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
   test("Check if labels and fields exist on registration screen") {
     running(fakeApplication, new Runnable {
       def run {
+        val form =Form( mapping( "firstName" -> nonEmptyText, "surname" -> nonEmptyText, "email" -> nonEmptyText ,
+          "confirmEmail" -> nonEmptyText, "password" -> nonEmptyText ,"confirmPassword" -> nonEmptyText)(Registration.apply)(Registration.unapply))
+
         //Context.current.set(TestSetup.testHttpContext)
-        val html: Html = views.html.register()
+        val html: Html = views.html.register(form)
         val doc: Document = Jsoup.parse(contentAsString(html))
 
         doc.select("#title").text.should(equal ("Account Registration"))
