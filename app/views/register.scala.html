@@ -1,0 +1,60 @@
+@* login Template File *@
+
+@main("Account Registration"){
+	<p>This page is the registration page for Hello World</p>
+    @helper.form(routes.Registration.register) {
+    	<div id="form-style" class="left">
+			<fieldset>
+				<legend>Your Personal Details</legend>
+				<div class="clear"></div>
+		        <p class="group">
+		          <label for="firstName">First Name: </label>
+		          <input id="firstName" type="text" class="firstName">
+		        </p>
+		        <p class="group">
+		          <label for="lastName">Surname: </label>
+		          <input id="lastName" type="text" class="lastName">
+		        </p>
+			</fieldset>
+			
+			<fieldset>
+				<legend>Your Contact Details</legend>
+				<div class="clear"></div>
+		        <p class="group">
+		          <label for="email">Email: </label>
+		          <input id="email" type="email" class="email">
+		        </p>
+		        <p class="group">
+		          <label for="confirmEmail">Confirm Email: </label>
+		          <input id="confirmEmail" type="email" class="confirmEmail">
+		        </p>
+			</fieldset>
+			
+			<fieldset>
+				<legend>Your Password</legend>
+				<div class="clear"></div>
+		        <p class="group">
+		          <label for="password">Password: </label>
+		          <input id="password" type="password" class="password">
+				  <span class="inline hint ">Make it at least six characters long</span>
+		        </p>
+		        <p class="group">
+		          <label for="confirmPassword">Confirm Password: </label>
+		          <input id="confirmPassword" type="password" class="confirmPassword">
+		        </p>
+			</fieldset>
+			
+
+			<fieldset>
+				<legend class="paddingLeft">Terms & Conditions</legend>
+				<div class="clear"></div>
+				<p>Before registering, please read our terms & conditions below</p>
+				<textarea cols="90" rows="3" id="terms" class="big" disabled="disabled" placeholder="Terms go here"></textarea>
+				
+				<p class="option group">
+		            <label for="agreeCbx"><input id="agreeCbx" type="checkbox"> I agree with the terms & conditions</label>
+				</p>
+			</fieldset>
+		</div>
+    }
+}
