@@ -2,59 +2,61 @@
 
 @main("Account Registration"){
 	<p id="pageDescription">This page is the registration page for Hello World</p>
-    @helper.form(routes.Registration.register) {
+
     	<div id="form-style" class="left">
 			<fieldset>
-				<legend id="PersonalDetailsTitle">Your Personal Details</legend>
+				<legend id="personalDetailsTitle">Your Personal Details</legend>
 				<div class="clear"></div>
 		        <p id="firstNameP" class="group">
-		          <label for="firstName">First Name: </label>
+		          <label id="firstNameLabel" for="firstName">First Name: </label>
 		          <input id="firstName" type="text" class="firstName">
 		        </p>
 		        <p id="lastNameP" class="group">
-		          <label for="lastName">Surname: </label>
+		          <label id="lastNameLabel" for="lastName">Surname: </label>
 		          <input id="lastName" type="text" class="lastName">
 		        </p>
 			</fieldset>
 			
 			<fieldset>
-				<legend id="ContactDetailsTitle">Your Contact Details</legend>
+				<legend id="contactDetailsTitle">Your Contact Details</legend>
 				<div class="clear"></div>
 		        <p id="emailP" class="group">
-		          <label for="email">Email: </label>
+		          <label id="emailLabel" for="email">Email: </label>
 		          <input id="email" type="email" class="email">
 		        </p>
 		        <p id="confirmEmailP" class="group"> 
-		          <label for="confirmEmail">Confirm Email: </label>
+		          <label id="confirmEmailLabel" for="confirmEmail">Confirm Email: </label>
 		          <input id="confirmEmail" type="email" class="confirmEmail">
 		        </p>
 			</fieldset>
 			
 			<fieldset>
-				<legend id="PasswordDetailsTitle">Your Password</legend>
+				<legend id="passwordDetailsTitle">Your Password</legend>
 				<div class="clear"></div>
 		        <p id="passwordP" class="group">
-		          <label for="password">Password: </label>
+		          <label id="passwordLabel" for="password">Password: </label>
 		          <input id="password" type="password" class="password">
 				  <span class="inline hint ">Make it at least six characters long</span>
 		        </p>
 		        <p id="confirmPasswordP" class="group">
-		          <label for="confirmPassword">Confirm Password: </label>
+		          <label id="confirmPasswordLabel" for="confirmPassword">Re-enter Password: </label>
 		          <input id="confirmPassword" type="password" class="confirmPassword">
 		        </p>
 			</fieldset>
 			
 
 			<fieldset>
-				<legend id="TermsTitle" class="paddingLeft">Terms & Conditions</legend>
+				<legend id="termsTitle" class="paddingLeft">Terms & Conditions</legend>
 				<div class="clear"></div>
 				<p id="TermsSubHeading">Before registering, please read our terms & conditions below</p>
 				<textarea cols="90" rows="3" id="terms" class="big" disabled="disabled" placeholder="Terms go here"></textarea>
 				
 				<p id="TermsP" class="option group">
-		            <label id="agreeLabel" for="agreeCbx"><input id="agreeCbx" type="checkbox"> I agree with the terms & conditions</label>
+		            <label id="agreeCbxLabel" for="agreeCbx"><input id="agreeCbx" type="checkbox" checked="no"> I agree with Terms & Conditions</label>
 				</p>
 			</fieldset>
+
+            <input type="submit" id="submitBtn" value = "Proceed>>"/>
 		</div>
-    }
+
 }
