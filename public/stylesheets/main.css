@@ -86,3 +86,90 @@ dl dd input {
 	clear:both;
 }
 
+#form-style.left fieldset {
+	margin: 0;
+	margin-top: 2em;
+}
+
+#form-style.left fieldset legend {
+	display: block;
+	padding-left: 7.7em;
+}
+
+#form-style.left legend {
+	font-family: "nta",Arial,sans-serif;
+	font-size: 24px;
+	line-height: 1.25;
+	font-weight: 400;
+	text-transform: none;
+	margin-bottom: 0.5em;
+	color: #0b0c0c;
+}
+
+.group {
+	font-family: "nta",Arial,sans-serif;
+	font-size: 19px !important;
+	line-height: 1.31579;
+	font-weight: 400;
+	text-transform: none;
+	margin: 0.75em 0;
+}
+
+#form-style.left label {
+	display: -moz-inline-stack;
+	display: inline-block;
+	text-align: left;
+	min-width: 9.0em;
+}
+
+#form-style.left label {
+	color: #0b0c0c;
+	font-family: "nta",Arial,sans-serif;
+	font-size: 19px;
+	line-height: 1.31579;
+	font-weight: 400;
+	text-transform: none;
+	vertical-align: top;
+	padding: 0.25em 0;
+}
+
+#form-style.left input.full-name {
+	width: 20em;
+}
+#form-style.left input[type="text"] {
+	min-width: 2em;
+}
+#form-style.left input[type="text"], #form-style.left input[type="email"], #form-style.left input[type="password"], #form-style.left input[type="date"], #form-style.left input[type="datetime"], #form-style.left input[type="datetime-local"], #form-style.left input[type="email"], #form-style.left input[type="month"], #form-style.left input[type="number"], #form-style.left input[type="search"], #form-style.left input[type="tel"], #form-style.left input[type="time"], #form-style.left input[type="url"], #form-style.left input[type="week"], #form-style.left select[size], #form-style.left textarea {
+	background-color: #f9f9f9;
+	border: 2px inset;
+	font-size: 1em;
+	padding: 0.1em 0 0.1em 0.4em;
+}
+
+#form-style.left input, #form-style.left select, #form-style.left textarea, #form-style.left .uneditable-field {
+	display: -moz-inline-stack;
+	display: inline-block;
+	margin: 0 0.5em;
+}
+
+.hint {
+	clear: left;
+	display: block;
+	font-family: "nta",Arial,sans-serif;
+	font-size: 16px;
+	line-height: 1.25;
+	font-weight: 300;
+	text-transform: none;
+}
+
+.inline.hint {
+	display: inline-block;
+}
+
+.adjustRight {
+	padding-left: 11.5em;
+}
+
+.paddingLeft {
+	padding-left: 0em !important;
+}
