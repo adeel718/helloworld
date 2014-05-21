@@ -13,8 +13,13 @@ import play.data.Form._
  */
 object UserRegistration extends Controller {
 
-  val form =Form( mapping( "firstName" -> nonEmptyText, "surname" -> nonEmptyText, "email" -> nonEmptyText ,
-    "confirmEmail" -> nonEmptyText, "password" -> nonEmptyText ,"confirmPassword" -> nonEmptyText)
+  val form =Form( mapping( "firstName" -> text.verifying("firstName should not be empty Please enter.", {!_.isEmpty}),
+    "surname" -> text.verifying("firstName should not be empty Please enter.", {!_.isEmpty}),
+    "email" -> email ,
+    "confirmEmail" -> email,
+     "password" -> text.verifying("password should not be empty Please enter.", {!_.isEmpty}) ,
+     "confirmPassword" -> text.verifying("Please confirm the password.", {!_.isEmpty}),
+     "tconditions" -> checked("Please accept terms & conditions"))
       (Registration.apply)(Registration.unapply))
 
   def index() = Action {
