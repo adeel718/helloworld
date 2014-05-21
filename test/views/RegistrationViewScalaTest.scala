@@ -35,8 +35,8 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
         doc.select("#firstNameLabel").text should(equal ("First Name:"))
         doc.select("#firstName").`val`() should(equal (""))
 
-        doc.select("#lastNameLabel").text should(equal ("Surname:"))
-        doc.select("#lastName").`val`() should(equal (""))
+        doc.select("#surnameLabel").text should(equal ("Last Name:"))
+        doc.select("#surname").`val`() should(equal (""))
 
         doc.select("#contactDetailsTitle").text.should(equal ("Your Contact Details"))
 
@@ -56,8 +56,8 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
 
         doc.select("#termsTitle").text should(equal ("Terms & Conditions"))
 
-        doc.select("#agreeCbx").attr("checked") should(equal ("no"))
-        doc.select("#agreeCbxLabel").text() should(equal ("I agree with Terms & Conditions"))
+        doc.select("#tConditions")
+        doc.select("#tConditionsCbxLabel").text() should(equal ("I agree with Terms & Conditions"))
 
 
         doc.select("#submitBtn").attr("value") should(equal ("Proceed>>"))
