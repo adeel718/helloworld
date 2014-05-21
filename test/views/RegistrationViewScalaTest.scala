@@ -41,7 +41,7 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
         doc.select("#firstNameLabel").text should(equal ("First Name:"))
         doc.select("#firstName").`val`() should(equal (""))
 
-        doc.select("#surnameLabel").text should(equal ("Last Name:"))
+        doc.select("#lastNameLabel").text should(equal ("Surname:"))
         doc.select("#surname").`val`() should(equal (""))
 
         doc.select("#contactDetailsTitle").text.should(equal ("Your Contact Details"))
