@@ -23,7 +23,7 @@ public class BaseSeleniumTest {
 	
 	public static FakeApplication app;
 	private String baseURL = "localhost:9000";
-	protected static WebDriver driver;
+	public WebDriver driver;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
