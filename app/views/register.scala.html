@@ -1,60 +1,112 @@
 @* login Template File *@
 @(register: play.api.data.Form[Registration])
 
+@firstName = @{register("firstName")}
+@surname = @{register("surname")}
+@email = @{register("email")}
+@confirmEmail = @{register("confirmEmail")}
+@password = @{register("password")}
+@confirmPassword = @{register("confirmPassword")}
+@tconditions = @{register("tconditions")}
+@import java.math.BigInteger; var i=0;
+
 @main("Account Registration"){
+@if(register.hasErrors){
+<div class="validation-summary">
+    <h1>Please check the form</h1>
+    <ul>
+        @for(error <- register.errors){
+            @{i=i+1}
+        <li><a href=@{"#error" +i}>@error.message</a></li>
+        }
+    </ul>
+</div>
+}
 	<p id="pageDescription">This page is the registration page for Hello World</p>
-@helper.form(routes.UserRegistration.submitUserRegistration) {
+        @helper.form(routes.UserRegistration.submitUserRegistration) {
     	<div id="form-style" class="left">
 			<fieldset>
-				<legend id="personalDetailsTitle">Your Personal Details</legend>
-				<div class="clear"></div>
-		        <p id="firstNameP" class="group">
-		          <label id="firstNameLabel" for="firstName">First Name: </label>
-		          <input id="firstName" type="text" class="firstName">
-		        </p>
-		        <p id="lastNameP" class="group">
-		          <label id="lastNameLabel" for="lastName">Surname: </label>
-		          <input id="lastName" type="text" class="lastName">
-		        </p>
+                        <legend id="personalDetailsTitle">Your Personal Details</legend>
+                        <div class="clear"></div>
+                <div @if(firstName.error.isDefined) { class="validation" }>
+                @firstName.error.map{ e =>
+                <span id="error1" class="validation-message">@e.message</span>
+                }
+                        <p id="firstNameP" class="group">
+                          <label id="firstNameLabel" for="firstName">First Name: </label>
+                          <input id="firstName" name="firstName" type="text" class="firstName">
+                        </p>
+                </div>
+                <div @if(surname.error.isDefined) { class="validation" }>
+                    @surname.error.map{ e =>
+                    <span id="error2" class="validation-message">@e.message</span>
+                    }
+                        <p id="lastNameP" class="group">
+                          <label id="lastNameLabel" for="surname">Surname: </label>
+                          <input id="surname"  name ="surname" type="text" class="lastName">
+                        </p>
+                </div>
 			</fieldset>
-			
+
+
 			<fieldset>
 				<legend id="contactDetailsTitle">Your Contact Details</legend>
 				<div class="clear"></div>
-		        <p id="emailP" class="group">
-		          <label id="emailLabel" for="email">Email: </label>
-		          <input id="email" type="email" class="email">
-		        </p>
-		        <p id="confirmEmailP" class="group"> 
-		          <label id="confirmEmailLabel" for="confirmEmail">Confirm Email: </label>
-		          <input id="confirmEmail" type="email" class="confirmEmail">
-		        </p>
+                <div @if(email.error.isDefined) { class="validation" }>
+                @email.error.map{ e =>
+                <span id="error3" class="validation-message">@e.message</span>
+                }
+                    <p id="emailP" class="group">
+                      <label id="emailLabel" for="email">Email: </label>
+                      <input id="email" name ="email" type="email" class="email">
+                    </p>
+                </div>
+                <div @if(confirmEmail.error.isDefined) { class="validation" }>
+                    @confirmEmail.error.map{ e =>
+                    <span id="error4" class="validation-message">@e.message</span>
+                    }
+                    <p id="confirmEmailP" class="group">
+                      <label id="confirmEmailLabel" for="confirmEmail">Confirm Email: </label>
+                      <input id="confirmEmail"  name ="confirmEmail" type="email" class="confirmEmail">
+                    </p>
+                </div>
 			</fieldset>
-			
 			<fieldset>
 				<legend id="passwordDetailsTitle">Your Password</legend>
 				<div class="clear"></div>
-		        <p id="passwordP" class="group">
-		          <label id="passwordLabel" for="password">Password: </label>
-		          <input id="password" type="password" class="password">
-				  <span class="inline hint ">Make it at least six characters long</span>
-		        </p>
-		        <p id="confirmPasswordP" class="group">
-		          <label id="confirmPasswordLabel" for="confirmPassword">Re-enter Password: </label>
-		          <input id="confirmPassword" type="password" class="confirmPassword">
-		        </p>
+                <div @if(password.error.isDefined) { class="validation" }>
+                    @password.error.map{ e =>
+                    <span id="error5" class="validation-message">@e.message</span>
+                    }
+                    <p id="passwordP" class="group">
+                      <label id="passwordLabel" for="password">Password: </label>
+                      <input id="password"  name ="password" type="password" class="password">
+                      <span class="inline hint ">Make it at least six characters long</span>
+                    </p>
+                </div>
+                <div @if(confirmPassword.error.isDefined) { class="validation" }>
+                    @confirmPassword.error.map{ e =>
+                    <span id="error6" class="validation-message">@e.message</span>
+                    }
+                        <p id="confirmPasswordP" class="group">
+                          <label id="confirmPasswordLabel" for="confirmPassword">Re-enter Password: </label>
+                          <input id="confirmPassword"  name ="confirmPassword" type="password" class="confirmPassword">
+                        </p>
+                </div>
 			</fieldset>
-			
-
 			<fieldset>
 				<legend id="termsTitle" class="paddingLeft">Terms & Conditions</legend>
 				<div class="clear"></div>
-				<p id="TermsSubHeading">Before registering, please read our terms & conditions below</p>
-				<textarea cols="90" rows="3" id="terms" class="big" disabled="disabled" placeholder="Terms go here"></textarea>
-				
-				<p id="TermsP" class="option group">
-		            <label id="agreeCbxLabel" for="agreeCbx"><input id="agreeCbx" type="checkbox" checked="no"> I agree with Terms & Conditions</label>
-				</p>
+                <p id="TermsSubHeading">Before registering, please read our terms & conditions below</p>
+                    <div @if(tconditions.error.isDefined) { class="validation" }>
+                    @tconditions.error.map{ e =>
+                    <span id="error7" class="validation-message">@e.message</span>
+                    }
+                    <textarea cols="90" rows="3" id="terms" class="big" disabled="disabled" placeholder="Terms go here"></textarea>
+                        <p id="TermsP" class="option group">
+                            <label id="agreeCbxLabel" for="tconditions"><input id="tconditions" type="checkbox" > I agree with Terms & Conditions</label>
+                        </p>
+                </div>
 			</fieldset>
 
             <input type="submit" id="submitBtn" value = "Proceed>>"/>

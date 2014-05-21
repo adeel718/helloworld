@@ -21,8 +21,14 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
   test("Check if labels and fields exist on registration screen") {
     running(fakeApplication, new Runnable {
       def run {
-        val form =Form( mapping( "firstName" -> nonEmptyText, "surname" -> nonEmptyText, "email" -> nonEmptyText ,
-          "confirmEmail" -> nonEmptyText, "password" -> nonEmptyText ,"confirmPassword" -> nonEmptyText)(Registration.apply)(Registration.unapply))
+        val form =Form( mapping( "firstName" -> text.verifying("firstName should not be empty Please enter.", {!_.isEmpty}),
+          "surname" -> text.verifying("firstName should not be empty Please enter.", {!_.isEmpty}),
+          "email" -> email ,
+          "confirmEmail" -> email,
+          "password" -> text.verifying("password should not be empty Please enter.", {!_.isEmpty}) ,
+          "confirmPassword" -> text.verifying("Please confirm the password.", {!_.isEmpty}),
+          "tconditions" -> checked("Please accept terms & conditions"))
+          (Registration.apply)(Registration.unapply))
 
         //Context.current.set(TestSetup.testHttpContext)
         val html: Html = views.html.register(form)
@@ -35,8 +41,8 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
         doc.select("#firstNameLabel").text should(equal ("First Name:"))
         doc.select("#firstName").`val`() should(equal (""))
 
-        doc.select("#lastNameLabel").text should(equal ("Surname:"))
-        doc.select("#lastName").`val`() should(equal (""))
+        doc.select("#surnameLabel").text should(equal ("Last Name:"))
+        doc.select("#surname").`val`() should(equal (""))
 
         doc.select("#contactDetailsTitle").text.should(equal ("Your Contact Details"))
 
@@ -56,8 +62,8 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
 
         doc.select("#termsTitle").text should(equal ("Terms & Conditions"))
 
-        doc.select("#agreeCbx").attr("checked") should(equal ("no"))
-        doc.select("#agreeCbxLabel").text() should(equal ("I agree with Terms & Conditions"))
+        doc.select("#tConditions")
+        doc.select("#tConditionsCbxLabel").text() should(equal ("I agree with Terms & Conditions"))
 
 
         doc.select("#submitBtn").attr("value") should(equal ("Proceed>>"))
@@ -68,18 +74,42 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
   test("Check if validation is in place and error messages shown") {
     //val data = Map("")
 
-    /*
+
     running(fakeApplication, new Runnable {
       def run {
 
-        val fakeRequest = fakeRequest(POST, "/register")
+        val form =Form( mapping( "firstName" -> text.verifying("firstName should not be empty Please enter.", {!_.isEmpty}),
+          "surname" -> text.verifying("firstName should not be empty Please enter.", {!_.isEmpty}),
+          "email" -> email ,
+          "confirmEmail" -> email,
+          "password" -> text.verifying("password should not be empty Please enter.", {!_.isEmpty}) ,
+          "confirmPassword" -> text.verifying("Please confirm the password.", {!_.isEmpty}),
+          "tconditions" -> checked("Please accept terms & conditions"))
+          (Registration.apply)(Registration.unapply))
 
-        val html: Html = views.html.register.render()
+        //val fakeRequest = fakeRequest(POST, "/register")
+
+        val html: Html = views.html.register(form)
         val doc: Document = Jsoup.parse(contentAsString(html))
 
-        doc.select("#firstNameLabel").text should(equal ("First Name"))
+        doc.select("#validation-summary").text should(include ("Please enter the first name field and it should not be blank"))
+        doc.select("#validation-summary").text should(include ("Please enter the surname field and it should not be blank"))
+        doc.select("#validation-summary").text should(include ("Please enter the email field and it should not be blank"))
+        doc.select("#validation-summary").text should(include ("Please enter the password field and it should not be blank"))
+        doc.select("#validation-summary").text should(include ("Please confirm that you agree with the terms & conditions"))
+
+        doc.select("#firstNameError").text should(include ("Please enter the first name field and it should not be blank"))
+
+        doc.select("#surnameError").text should(include ("Please enter the surname field and it should not be blank"))
+
+        doc.select("#emailError").text should(include ("Please enter the email field and it should not be blank"))
+
+        doc.select("#passwordError").text should(include ("Please enter the password field and it should not be blank"))
+
+        doc.select("#termsError").text should(include ("Please confirm that you agree with the terms & conditions"))
+
       }
-    })*/
+    })
   }
 
 }
