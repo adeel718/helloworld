@@ -34,7 +34,7 @@
                 }
                         <p id="firstNameP" class="group">
                           <label id="firstNameLabel" for="firstName">First Name: </label>
-                          <input id="firstName" type="text" class="firstName">
+                          <input id="firstName" name="firstName" type="text" class="firstName">
                         </p>
                 </div>
                 <div @if(surname.error.isDefined) { class="validation" }>
@@ -43,7 +43,7 @@
                     }
                         <p id="lastNameP" class="group">
                           <label id="lastNameLabel" for="surname">Surname: </label>
-                          <input id="surname" type="text" class="lastName">
+                          <input id="surname"  name ="surname" type="text" class="lastName">
                         </p>
                 </div>
 			</fieldset>
@@ -58,7 +58,7 @@
                 }
                     <p id="emailP" class="group">
                       <label id="emailLabel" for="email">Email: </label>
-                      <input id="email" type="email" class="email">
+                      <input id="email" name ="email" type="email" class="email">
                     </p>
                 </div>
                 <div @if(confirmEmail.error.isDefined) { class="validation" }>
@@ -67,7 +67,7 @@
                     }
                     <p id="confirmEmailP" class="group">
                       <label id="confirmEmailLabel" for="confirmEmail">Confirm Email: </label>
-                      <input id="confirmEmail" type="email" class="confirmEmail">
+                      <input id="confirmEmail"  name ="confirmEmail" type="email" class="confirmEmail">
                     </p>
                 </div>
 			</fieldset>
@@ -80,7 +80,7 @@
                     }
                     <p id="passwordP" class="group">
                       <label id="passwordLabel" for="password">Password: </label>
-                      <input id="password" type="password" class="password">
+                      <input id="password"  name ="password" type="password" class="password">
                       <span class="inline hint ">Make it at least six characters long</span>
                     </p>
                 </div>
@@ -90,7 +90,7 @@
                     }
                         <p id="confirmPasswordP" class="group">
                           <label id="confirmPasswordLabel" for="confirmPassword">Re-enter Password: </label>
-                          <input id="confirmPassword" type="password" class="confirmPassword">
+                          <input id="confirmPassword"  name ="confirmPassword" type="password" class="confirmPassword">
                         </p>
                 </div>
 			</fieldset>
