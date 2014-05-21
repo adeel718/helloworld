@@ -69,7 +69,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 		assertEquals(verifyRegDescriptionExp, verifyRegDescriptionAct);
 		
 		String verifyRegPersonalDetailsTitleExp = "Your Personal Details";
-		String verifyRegPersonalDetailsTitleAct = driver.findElement(By.id("PersonalDetailsTitle")).getText();
+		String verifyRegPersonalDetailsTitleAct = driver.findElement(By.id("personalDetailsTitle")).getText();
 		assertEquals(verifyRegPersonalDetailsTitleExp, verifyRegPersonalDetailsTitleAct);
 		
 		String verifyRegPersonalDetailsFNameExp = "First Name";
@@ -81,7 +81,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 		assertEquals(verifyRegPersonalDetailsSNameExp, verifyRegPersonalDetailsSNameAct);
 		
 		String verifyRegContactDetailsTitleExp = "Your Contact Details";
-		String verifyRegContactDetailsTitleAct = driver.findElement(By.id("ContactDetailsTitle")).getText();
+		String verifyRegContactDetailsTitleAct = driver.findElement(By.id("contactDetailsTitle")).getText();
 		assertEquals(verifyRegContactDetailsTitleExp, verifyRegContactDetailsTitleAct);
 		
 		String verifyRegContactDetailsCorrEmailExp = "Correspondence Email";
@@ -93,7 +93,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 		assertEquals(verifyRegContactDetailsConfEmailExp, verifyRegContactDetailsConfEmailAct);
 		
 		String verifyRegPasswordTitleExp = "Your Password";
-		String verifyRegPasswordTitleAct = driver.findElement(By.id("PasswordDetailsTitle")).getText();
+		String verifyRegPasswordTitleAct = driver.findElement(By.id("passwordDetailsTitle")).getText();
 		assertEquals(verifyRegPasswordTitleExp, verifyRegPasswordTitleAct);
 		
 		String verifyRegPasswordPwordExp = "Password";
@@ -105,7 +105,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 		assertEquals(verifyRegPasswordReExp, verifyRegPasswordReAct);
 		
 		String verifyRegTandCTitleExp = "Terms and Conditions";
-		String verifyRegTandCTitleAct = driver.findElement(By.id("TermsTitle")).getText();
+		String verifyRegTandCTitleAct = driver.findElement(By.id("termsTitle")).getText();
 		assertEquals(verifyRegTandCTitleExp, verifyRegTandCTitleAct);
 		
 		String verifyRegTandCDescExp = "Before registering, please read our Terms and Conditions";
@@ -116,7 +116,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 		String verifyRegBoxTextAct = driver.findElement(By.id("TermsP")).getText();
 		assertEquals(verifyRegBoxTextExp, verifyRegBoxTextAct);
 		
-		assertTrue(isElementPresent(By.name("agreeCbx")));
+		assertTrue(isElementPresent(By.name("tconditions")));
 		}
 		
 		@Test
