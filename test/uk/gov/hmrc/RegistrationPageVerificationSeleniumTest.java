@@ -10,9 +10,15 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
+import org.openqa.selenium.firefox.FirefoxDriver;
 import views.BaseSeleniumTest;
 
 public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
+    @Before
+    public void myBefore(){
+        driver = new FirefoxDriver();
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    }
 
 	@Test
 	public void myTest(){
