@@ -11,7 +11,8 @@ case class Registration (firstName : String,
                          email : String ,
                          confirmEmail : String,
                          password : String,
-                         confirmPassword : String)
+                         confirmPassword : String,
+                         tconditions:Boolean)
 object Registration {
 
 
