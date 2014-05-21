@@ -21,8 +21,14 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
   test("Check if labels and fields exist on registration screen") {
     running(fakeApplication, new Runnable {
       def run {
-        val form =Form( mapping( "firstName" -> nonEmptyText, "surname" -> nonEmptyText, "email" -> nonEmptyText ,
-          "confirmEmail" -> nonEmptyText, "password" -> nonEmptyText ,"confirmPassword" -> nonEmptyText)(Registration.apply)(Registration.unapply))
+        val form =Form( mapping( "firstName" -> text.verifying("firstName should not be empty Please enter.", {!_.isEmpty}),
+          "surname" -> text.verifying("firstName should not be empty Please enter.", {!_.isEmpty}),
+          "email" -> email ,
+          "confirmEmail" -> email,
+          "password" -> text.verifying("password should not be empty Please enter.", {!_.isEmpty}) ,
+          "confirmPassword" -> text.verifying("Please confirm the password.", {!_.isEmpty}),
+          "tconditions" -> checked("Please accept terms & conditions"))
+          (Registration.apply)(Registration.unapply))
 
         //Context.current.set(TestSetup.testHttpContext)
         val html: Html = views.html.register(form)
@@ -72,8 +78,14 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
     running(fakeApplication, new Runnable {
       def run {
 
-        val form =Form( mapping( "firstName" -> nonEmptyText, "surname" -> nonEmptyText, "email" -> nonEmptyText ,
-          "confirmEmail" -> nonEmptyText, "password" -> nonEmptyText ,"confirmPassword" -> nonEmptyText)(Registration.apply)(Registration.unapply))
+        val form =Form( mapping( "firstName" -> text.verifying("firstName should not be empty Please enter.", {!_.isEmpty}),
+          "surname" -> text.verifying("firstName should not be empty Please enter.", {!_.isEmpty}),
+          "email" -> email ,
+          "confirmEmail" -> email,
+          "password" -> text.verifying("password should not be empty Please enter.", {!_.isEmpty}) ,
+          "confirmPassword" -> text.verifying("Please confirm the password.", {!_.isEmpty}),
+          "tconditions" -> checked("Please accept terms & conditions"))
+          (Registration.apply)(Registration.unapply))
 
         //val fakeRequest = fakeRequest(POST, "/register")
 
