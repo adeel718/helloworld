@@ -84,7 +84,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 		String verifyRegContactDetailsTitleAct = driver.findElement(By.id("contactDetailsTitle")).getText();
 		assertEquals(verifyRegContactDetailsTitleExp, verifyRegContactDetailsTitleAct);
 		
-		String verifyRegContactDetailsCorrEmailExp = "Correspondence Email;";
+		String verifyRegContactDetailsCorrEmailExp = "Correspondence Email:";
 		String verifyRegContactDetailsCorrEmailAct = driver.findElement(By.id("emailP")).getText();
 		assertEquals(verifyRegContactDetailsCorrEmailExp, verifyRegContactDetailsCorrEmailAct);
 		
