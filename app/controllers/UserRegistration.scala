@@ -14,13 +14,13 @@ import play.api.i18n.Messages
  */
 object UserRegistration extends Controller {
 
-  val form =Form( mapping( "firstName" -> text.verifying(Messages("error.firstName.required"), {!_.isEmpty}),
-    "surname" -> text.verifying("surname should not be empty Please enter.", {!_.isEmpty}),
-    "email" -> text.verifying("email should not be empty Please enter valid email.", {!_.isEmpty}) ,
-    "confirmEmail" -> text.verifying("Please confirm email.", {!_.isEmpty}) ,
-     "password" -> text.verifying("password should not be empty Please enter.", {!_.isEmpty}) ,
-     "confirmPassword" -> text.verifying("Please confirm entered password.", {!_.isEmpty}),
-     "tconditions" -> checked("Please accept terms & conditions"))
+  val form =Form( mapping( "firstName" -> text.verifying(Messages("error.registration.field.required", "firstName"), {!_.isEmpty}),
+    "surname" -> text.verifying(Messages("error.registration.field.required", "surname"), {!_.isEmpty}),
+    "email" -> text.verifying(Messages("error.email.required"), {!_.isEmpty}) ,
+    "confirmEmail" -> text.verifying(Messages("error.confirmEmail.required"), {!_.isEmpty}) ,
+     "password" -> text.verifying(Messages("error.registration.field.required", "password"), {!_.isEmpty}) ,
+     "confirmPassword" -> text.verifying(Messages("error.confirmPassword.required"), {!_.isEmpty}),
+     "tconditions" -> checked(Messages("error.tconditions.required")))
       (Registration.apply)(Registration.unapply))
 
   def index() = Action {
