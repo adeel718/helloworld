@@ -67,9 +67,9 @@ public class RegistrationPageVerificationSeleniumTest {
 		
 		//Registration Page Tests
 		
-		String verifyRegTitleExp = "Account Registration";
-		String verifyRegTitleAct = webDriver.findElement(By.id("")).getText();
-		assertEquals(verifyRegTitleExp, verifyRegTitleAct);
+//		String verifyRegTitleExp = "Account Registration";
+//		String verifyRegTitleAct = webDriver.findElement(By.id("")).getText();
+//		assertEquals(verifyRegTitleExp, verifyRegTitleAct);
 		
 		String verifyRegDescriptionExp = "This page is the registration page for Hello World";
 		String verifyRegDescriptionAct = webDriver.findElement(By.id("pageDescription")).getText();
@@ -91,7 +91,7 @@ public class RegistrationPageVerificationSeleniumTest {
 		String verifyRegContactDetailsTitleAct = webDriver.findElement(By.id("ContactDetailsTitle")).getText();
 		assertEquals(verifyRegContactDetailsTitleExp, verifyRegContactDetailsTitleAct);
 		
-		String verifyRegContactDetailsCorrEmailExp = "Correspondance Email";
+		String verifyRegContactDetailsCorrEmailExp = "Correspondence Email";
 		String verifyRegContactDetailsCorrEmailAct = webDriver.findElement(By.id("emailP")).getText();
 		assertEquals(verifyRegContactDetailsCorrEmailExp, verifyRegContactDetailsCorrEmailAct);
 		
