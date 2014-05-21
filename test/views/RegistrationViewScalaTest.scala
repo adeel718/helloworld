@@ -63,7 +63,7 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
         doc.select("#termsTitle").text should(equal ("Terms & Conditions"))
 
         doc.select("#tConditions")
-        doc.select("#tConditionsCbxLabel").text() should(equal ("I agree with Terms & Conditions"))
+        doc.select("#agreeCbxLabel").text() should(include ("I agree with Terms & Conditions"))
 
 
         doc.select("#submitBtn").attr("value") should(equal ("Proceed>>"))
