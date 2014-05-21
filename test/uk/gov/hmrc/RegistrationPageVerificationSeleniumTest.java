@@ -72,11 +72,11 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 		String verifyRegPersonalDetailsTitleAct = driver.findElement(By.id("personalDetailsTitle")).getText();
 		assertEquals(verifyRegPersonalDetailsTitleExp, verifyRegPersonalDetailsTitleAct);
 		
-		String verifyRegPersonalDetailsFNameExp = "First Name";
+		String verifyRegPersonalDetailsFNameExp = "First Name:";
 		String verifyRegPersonalDetailsFNameAct = driver.findElement(By.id("firstNameP")).getText();
 		assertEquals(verifyRegPersonalDetailsFNameExp, verifyRegPersonalDetailsFNameAct);
 		
-		String verifyRegPersonalDetailsSNameExp = "Surname";
+		String verifyRegPersonalDetailsSNameExp = "Surname:";
 		String verifyRegPersonalDetailsSNameAct = driver.findElement(By.id("lastNameP")).getText();
 		assertEquals(verifyRegPersonalDetailsSNameExp, verifyRegPersonalDetailsSNameAct);
 		
@@ -84,11 +84,11 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 		String verifyRegContactDetailsTitleAct = driver.findElement(By.id("contactDetailsTitle")).getText();
 		assertEquals(verifyRegContactDetailsTitleExp, verifyRegContactDetailsTitleAct);
 		
-		String verifyRegContactDetailsCorrEmailExp = "Correspondence Email";
+		String verifyRegContactDetailsCorrEmailExp = "Correspondence Email;";
 		String verifyRegContactDetailsCorrEmailAct = driver.findElement(By.id("emailP")).getText();
 		assertEquals(verifyRegContactDetailsCorrEmailExp, verifyRegContactDetailsCorrEmailAct);
 		
-		String verifyRegContactDetailsConfEmailExp = "Confirm Email";
+		String verifyRegContactDetailsConfEmailExp = "Confirm Email:";
 		String verifyRegContactDetailsConfEmailAct = driver.findElement(By.id("confirmEmailP")).getText();
 		assertEquals(verifyRegContactDetailsConfEmailExp, verifyRegContactDetailsConfEmailAct);
 		
@@ -96,11 +96,11 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 		String verifyRegPasswordTitleAct = driver.findElement(By.id("passwordDetailsTitle")).getText();
 		assertEquals(verifyRegPasswordTitleExp, verifyRegPasswordTitleAct);
 		
-		String verifyRegPasswordPwordExp = "Password";
+		String verifyRegPasswordPwordExp = "Password:";
 		String verifyRegPasswordPwordAct = driver.findElement(By.id("passwordP")).getText();
 		assertEquals(verifyRegPasswordPwordExp, verifyRegPasswordPwordAct);
 		
-		String verifyRegPasswordReExp = "Re-enter Password";
+		String verifyRegPasswordReExp = "Re-enter Password:";
 		String verifyRegPasswordReAct = driver.findElement(By.id("confirmPasswordP")).getText();
 		assertEquals(verifyRegPasswordReExp, verifyRegPasswordReAct);
 		
