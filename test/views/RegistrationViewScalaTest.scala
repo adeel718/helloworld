@@ -68,18 +68,36 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
   test("Check if validation is in place and error messages shown") {
     //val data = Map("")
 
-    /*
+
     running(fakeApplication, new Runnable {
       def run {
 
-        val fakeRequest = fakeRequest(POST, "/register")
+        val form =Form( mapping( "firstName" -> nonEmptyText, "surname" -> nonEmptyText, "email" -> nonEmptyText ,
+          "confirmEmail" -> nonEmptyText, "password" -> nonEmptyText ,"confirmPassword" -> nonEmptyText)(Registration.apply)(Registration.unapply))
 
-        val html: Html = views.html.register.render()
+        //val fakeRequest = fakeRequest(POST, "/register")
+
+        val html: Html = views.html.register(form)
         val doc: Document = Jsoup.parse(contentAsString(html))
 
-        doc.select("#firstNameLabel").text should(equal ("First Name"))
+        doc.select("#validation-summary").text should(include ("Please enter the first name field and it should not be blank"))
+        doc.select("#validation-summary").text should(include ("Please enter the surname field and it should not be blank"))
+        doc.select("#validation-summary").text should(include ("Please enter the email field and it should not be blank"))
+        doc.select("#validation-summary").text should(include ("Please enter the password field and it should not be blank"))
+        doc.select("#validation-summary").text should(include ("Please confirm that you agree with the terms & conditions"))
+
+        doc.select("#firstNameError").text should(include ("Please enter the first name field and it should not be blank"))
+
+        doc.select("#surnameError").text should(include ("Please enter the surname field and it should not be blank"))
+
+        doc.select("#emailError").text should(include ("Please enter the email field and it should not be blank"))
+
+        doc.select("#passwordError").text should(include ("Please enter the password field and it should not be blank"))
+
+        doc.select("#termsError").text should(include ("Please confirm that you agree with the terms & conditions"))
+
       }
-    })*/
+    })
   }
 
 }
