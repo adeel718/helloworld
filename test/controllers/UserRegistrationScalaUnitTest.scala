@@ -33,7 +33,7 @@ class UserRegistrationScalaUnitTest  extends FunSuite with Matchers{
 
     Helpers.status(result).should(equal(Http.Status.BAD_REQUEST))
   }
-
+/*
   test (" User submits registration form by providing valid data") {
 
 //    val requestValues = Map("firstName" -> "Stephen", "surname" -> "Butler" , "email" -> "sbutler@gmail.com" , "confirmEmail" -> "sbutler@gmail.com" , "password" -> "password1" , "confirmPassword"-> "password1")
@@ -49,5 +49,5 @@ class UserRegistrationScalaUnitTest  extends FunSuite with Matchers{
 
     redirectLocation(result).should(equal(Some("/login")))
   }
-
+*/
 }
