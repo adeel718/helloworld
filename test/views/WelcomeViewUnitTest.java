@@ -1,11 +1,9 @@
 package views;
 
-import static org.fest.assertions.Assertions.*;
-import static play.test.Helpers.*;
-
-import java.util.Arrays;
-import java.util.Collection;
-
+import static org.fest.assertions.Assertions.assertThat;
+import static play.test.Helpers.contentAsString;
+import static play.test.Helpers.fakeApplication;
+import static play.test.Helpers.running;
 import helper.TestSetup;
 
 import org.jsoup.Jsoup;

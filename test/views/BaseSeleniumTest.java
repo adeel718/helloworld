@@ -4,15 +4,9 @@ import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.fakeGlobal;
 import static play.test.Helpers.inMemoryDatabase;
 
-import java.io.File;
-import java.util.concurrent.TimeUnit;
-
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import play.test.FakeApplication;
 import play.test.TestServer;
