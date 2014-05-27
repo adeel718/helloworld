@@ -12,24 +12,25 @@ import views.html._
 import play.api.data.Form
 import play.api.data.Forms._
 import models.Registration
+import play.api.i18n.Messages
 
 /**
  * Created by user02 on 5/20/14.
  */
 class RegistrationViewScalaTest extends FunSuite with Matchers {
 
+  val form =Form( mapping( "firstName" -> text.verifying(Messages("error.registration.field.required", "firstName"), {!_.isEmpty}),
+    "surname" -> text.verifying(Messages("error.registration.field.required", "surname"), {!_.isEmpty}),
+    "email" -> text.verifying(Messages("error.email.required"), {!_.isEmpty}) ,
+    "confirmEmail" -> text.verifying(Messages("error.confirmEmail.required"), {!_.isEmpty}) ,
+    "password" -> text.verifying(Messages("error.registration.field.required", "password"), {!_.isEmpty}) ,
+    "confirmPassword" -> text.verifying(Messages("error.confirmPassword.required"), {!_.isEmpty}),
+    "tconditions" -> checked(Messages("error.tconditions.required")))
+    (Registration.apply)(Registration.unapply))
+
   test("Check if labels and fields exist on registration screen") {
     running(fakeApplication, new Runnable {
       def run {
-        val form =Form( mapping( "firstName" -> text.verifying("firstName should not be empty Please enter.", {!_.isEmpty}),
-          "surname" -> text.verifying("firstName should not be empty Please enter.", {!_.isEmpty}),
-          "email" -> email ,
-          "confirmEmail" -> email,
-          "password" -> text.verifying("password should not be empty Please enter.", {!_.isEmpty}) ,
-          "confirmPassword" -> text.verifying("Please confirm the password.", {!_.isEmpty}),
-          "tconditions" -> checked("Please accept terms & conditions"))
-          (Registration.apply)(Registration.unapply))
-
         //Context.current.set(TestSetup.testHttpContext)
         val html: Html = views.html.register(form)
         val doc: Document = Jsoup.parse(contentAsString(html))
@@ -65,7 +66,6 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
         doc.select("#tConditions")
         doc.select("#agreeCbxLabel").text() should(include ("I agree with Terms & Conditions"))
 
-
         doc.select("#submitBtn").attr("value") should(equal ("Proceed>>"))
       }
     })
@@ -77,48 +77,30 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
 
     running(fakeApplication, new Runnable {
       def run {
-
-        val form =Form( mapping( "firstName" -> text.verifying("firstName should not be empty Please enter.", {!_.isEmpty}),
-          "surname" -> text.verifying("surname should not be empty Please enter.", {!_.isEmpty}),
-          "email" -> text.verifying("email should not be empty Please enter valid email.", {!_.isEmpty}),
-          "confirmEmail" -> text.verifying("Please confirm email.", {!_.isEmpty}),
-          "password" -> text.verifying("password should not be empty Please enter.", {!_.isEmpty}) ,
-          "confirmPassword" -> text.verifying("Please confirm entered password.", {!_.isEmpty}),
-          "tconditions" -> checked("Please accept terms & conditions"))
-          (Registration.apply)(Registration.unapply)
-          ).bind(Map(
-              "firstName" -> "",
-              "surname" -> "",
-              "email" -> "",
-              "confirmEmail" -> "",
-              "password" -> "",
-              "confirmPassword" -> ""
-              ))
-
         //val fakeRequest = fakeRequest(POST, "/register")
 
         val html: Html = views.html.register(form)
         val doc: Document = Jsoup.parse(contentAsString(html))
 
-        doc.select("#validation-summary").text should(include ("firstName should not be empty Please enter."))
-        doc.select("#validation-summary").text should(include ("surname should not be empty Please enter."))
-        doc.select("#validation-summary").text should(include ("email should not be empty Please enter valid email."))
-        doc.select("#validation-summary").text should(include ("Please confirm email."))
-        doc.select("#validation-summary").text should(include ("password should not be empty Please enter."))
-        doc.select("#validation-summary").text should(include ("Please confirm entered password."))
-        doc.select("#validation-summary").text should(include ("Please accept terms & conditions"))
+        /*doc.select("#validation-summary").text should(include (Messages("error.registration.field.required", "firstName")))
+        doc.select("#validation-summary").text should(include (Messages("error.registration.field.required", "surname")))
+        doc.select("#validation-summary").text should(include (Messages("error.email.field.required", "email")))
+        doc.select("#validation-summary").text should(include (Messages("error.confirmEmail.field.required", "confirmEmail")))
+        doc.select("#validation-summary").text should(include (Messages("error.registration.field.required", "password")))
+        doc.select("#validation-summary").text should(include (Messages("error.confirmPassword.field.required", "confirmPassword")))
+        doc.select("#validation-summary").text should(include (Messages("error.tconditions.field.required", "tconditions")))*/
 
-        doc.select("#error1").text should(include ("firstName should not be empty Please enter."))
+        doc.select("#errorfirstName").text should(include ("firstName should not be empty Please enter."))
 
-        doc.select("#error2").text should(include ("surname should not be empty Please enter."))
+        doc.select("#errorsurname").text should(include ("surname should not be empty Please enter."))
 
-        doc.select("#error3").text should(include ("email should not be empty Please enter valid email."))
-        doc.select("#error4").text should(include ("Please confirm email."))
+        doc.select("#erroremail").text should(include ("email should not be empty Please enter valid email."))
+        doc.select("#errorconfirmEmail").text should(include ("Please confirm email."))
         
-        doc.select("#error5").text should(include ("password should not be empty Please enter."))
-        doc.select("#error6").text should(include ("Please confirm entered password."))
+        doc.select("#errorpassword").text should(include ("password should not be empty Please enter."))
+        doc.select("#errorconfirmPassword").text should(include ("Please confirm entered password."))
 
-        doc.select("#error7").text should(include ("Please accept terms & conditions"))
+        doc.select("#errortConditions").text should(include ("Please accept terms & conditions"))
       }
     })
   }

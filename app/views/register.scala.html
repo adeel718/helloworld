@@ -12,15 +12,15 @@
 
 @main("Account Registration"){
 @if(register.hasErrors){
-<div id="validation-summary" class="validation-summary">
-    <h1>Please check the form</h1>
-    <ul>
-        @for(error <- register.errors){
-            @{i=i+1}
-        <li><a href=@{"#error" +i}>@error.message</a></li>
-        }
-    </ul>
-</div>
+    <div id="validation-summary" class="validation-summary">
+        <h1>Please check the form</h1>
+        <ul>
+            @for(error <- register.errors){
+                @{i=i+1}
+            <li><a href=@{"#error" + error.key}>@error.message</a></li>
+            }
+        </ul>
+    </div>
 }
 	<p id="pageDescription">This page is the registration page for Hello World</p>
         @helper.form(routes.UserRegistration.submitUserRegistration) {
@@ -30,7 +30,7 @@
                         <div class="clear"></div>
                 <div @if(firstName.error.isDefined) { class="validation" }>
                 @firstName.error.map{ e =>
-                <span id="error1" class="validation-message">@e.message</span>
+                <span id="errorfirstName" class="validation-message">@e.message</span>
                 }
                         <p id="firstNameP" class="group">
                           <label id="firstNameLabel" for="firstName">First Name: </label>
@@ -39,7 +39,7 @@
                 </div>
                 <div @if(surname.error.isDefined) { class="validation" }>
                     @surname.error.map{ e =>
-                    <span id="error2" class="validation-message">@e.message</span>
+                    <span id="errorsurname" class="validation-message">@e.message</span>
                     }
                         <p id="lastNameP" class="group">
                           <label id="lastNameLabel" for="surname">Surname: </label>
@@ -54,7 +54,7 @@
 				<div class="clear"></div>
                 <div @if(email.error.isDefined) { class="validation" }>
                 @email.error.map{ e =>
-                <span id="error3" class="validation-message">@e.message</span>
+                <span id="erroremail" class="validation-message">@e.message</span>
                 }
                     <p id="emailP" class="group">
                       <label id="emailLabel" for="email">Email: </label>
@@ -63,7 +63,7 @@
                 </div>
                 <div @if(confirmEmail.error.isDefined) { class="validation" }>
                     @confirmEmail.error.map{ e =>
-                    <span id="error4" class="validation-message">@e.message</span>
+                    <span id="errorconfirmEmail" class="validation-message">@e.message</span>
                     }
                     <p id="confirmEmailP" class="group">
                       <label id="confirmEmailLabel" for="confirmEmail">Confirm Email: </label>
@@ -76,7 +76,7 @@
 				<div class="clear"></div>
                 <div @if(password.error.isDefined) { class="validation" }>
                     @password.error.map{ e =>
-                    <span id="error5" class="validation-message">@e.message</span>
+                    <span id="errorpassword" class="validation-message">@e.message</span>
                     }
                     <p id="passwordP" class="group">
                       <label id="passwordLabel" for="password">Password: </label>
@@ -86,7 +86,7 @@
                 </div>
                 <div @if(confirmPassword.error.isDefined) { class="validation" }>
                     @confirmPassword.error.map{ e =>
-                    <span id="error6" class="validation-message">@e.message</span>
+                    <span id="errorconfirmPassword" class="validation-message">@e.message</span>
                     }
                         <p id="confirmPasswordP" class="group">
                           <label id="confirmPasswordLabel" for="confirmPassword">Re-enter Password: </label>
@@ -100,7 +100,7 @@
                 <p id="TermsSubHeading">Before registering, please read our terms & conditions below</p>
                     <div @if(tconditions.error.isDefined) { class="validation" }>
                     @tconditions.error.map{ e =>
-                    <span id="error7" class="validation-message">@e.message</span>
+                    <span id="errortConditions" class="validation-message">@e.message</span>
                     }
                     <textarea cols="90" rows="3" id="terms" class="big" disabled="disabled" placeholder="Terms go here"></textarea>
                         <p id="TermsP" class="option group">
