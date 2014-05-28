@@ -1,3 +1,6 @@
+import com.typesafe.sbteclipse.core._
+import scala.xml.transform.RewriteRule
+
 name := "HelloWorld"
 
 version := "1.0-SNAPSHOT"
@@ -13,3 +16,7 @@ libraryDependencies ++= Seq(
 )     
 
 play.Project.playJavaSettings
+
+EclipseKeys.projectFlavor := EclipseProjectFlavor.Scala
+
+EclipseKeys.projectTransformerFactories := Seq[EclipseTransformerFactory[RewriteRule]]()
