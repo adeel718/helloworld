@@ -8,7 +8,7 @@
 @password = @{register("password")}
 @confirmPassword = @{register("confirmPassword")}
 @tconditions = @{register("tconditions")}
-@import java.math.BigInteger; var i=0;
+
 
 @main("Account Registration"){
 @if(register.hasErrors){
@@ -16,7 +16,6 @@
         <h1>Please check the form</h1>
         <ul>
             @for(error <- register.errors){
-                @{i=i+1}
             <li><a href=@{"#error" + error.key}>@error.message</a></li>
             }
         </ul>
@@ -100,7 +99,7 @@
                 <p id="TermsSubHeading">Before registering, please read our terms & conditions below</p>
                     <div @if(tconditions.error.isDefined) { class="validation" }>
                     @tconditions.error.map{ e =>
-                    <span id="errortConditions" class="validation-message">@e.message</span>
+                    <span id="errortconditions" class="validation-message">@e.message</span>
                     }
                     <textarea cols="90" rows="3" id="terms" class="big" disabled="disabled" placeholder="Terms go here"></textarea>
                         <p id="TermsP" class="option group">
