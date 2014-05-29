@@ -247,7 +247,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
         driver.findElement(By.name("password")).sendKeys("12345678");
         driver.findElement(By.name("confirmPassword")).sendKeys("12345678");
 
-        driver.findElement(By.id("tConditions")).click();
+        driver.findElement(By.id("tconditions")).click();
 
         driver.findElement(By.name("submitBtn")).click();
 
@@ -268,7 +268,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
         driver.findElement(By.name("password")).sendKeys("12345678");
         driver.findElement(By.name("confirmPassword")).sendKeys("passwordnotmatch");
 
-        driver.findElement(By.id("tConditions")).click();
+        driver.findElement(By.id("tconditions")).click();
 
         driver.findElement(By.name("submitBtn")).click();
 
@@ -294,7 +294,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
         driver.findElement(By.name("password")).sendKeys("12345678");
         driver.findElement(By.name("confirmPassword")).sendKeys("12345678");
 
-        driver.findElement(By.id("tConditions")).click();
+        driver.findElement(By.id("tconditions")).click();
 
         driver.findElement(By.name("submitBtn")).click();
 

@@ -100,11 +100,11 @@
                 <p id="TermsSubHeading">Before registering, please read our terms & conditions below</p>
                     <div @if(tconditions.error.isDefined) { class="validation" }>
                     @tconditions.error.map{ e =>
-                    <span id="errortConditions" class="validation-message">@e.message</span>
+                    <span id="errortconditions" class="validation-message">@e.message</span>
                     }
                     <textarea cols="90" rows="3" id="terms" class="big" disabled="disabled" placeholder="Terms go here"></textarea>
                         <p id="TermsP" class="option group">
-                            <label id="agreeCbxLabel" for="tconditions"><input id="tconditions" type="checkbox" > I agree with Terms & Conditions</label>
+                            <label id="agreeCbxLabel" for="tconditions"><input id="tconditions" name="tconditions" value="true" type="checkbox" > I agree with Terms & Conditions</label>
                         </p>
                 </div>
 			</fieldset>

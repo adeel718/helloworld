@@ -64,7 +64,7 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
 
         doc.select("#termsTitle").text should(equal ("Terms & Conditions"))
 
-        doc.select("#tConditions")
+        doc.select("#tconditions")
         doc.select("#agreeCbxLabel").text() should(include ("I agree with Terms & Conditions"))
 
         doc.select("#submitBtn").attr("value") should(equal ("Proceed>>"))
@@ -110,7 +110,7 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
         doc.select("#errorpassword").text should(include ("password should not be empty Please enter."))
         doc.select("#errorconfirmPassword").text should(include ("Please confirm entered password."))
 
-        doc.select("#errortConditions").text should(include ("Please accept terms & conditions"))
+        doc.select("#errortconditions").text should(include ("Please accept terms & conditions"))
       }
   }
 
