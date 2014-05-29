@@ -15,10 +15,9 @@ class UserRegistrationScalaUnitTest  extends FunSuite with Matchers{
 
   //implicit val timeout: Timeout = Timeout(100L)
 
-  test ("User has been presented with the Registration screen")
-  {
-    var fakeRequest = FakeRequest()
-    val result = controllers.UserRegistration.index.apply(fakeRequest)
+  test ("User has been presented with the Registration screen") {
+
+    val result = controllers.UserRegistration.index.apply(FakeRequest())
 
     status(result).should(equal(Http.Status.OK))
 
@@ -27,27 +26,31 @@ class UserRegistrationScalaUnitTest  extends FunSuite with Matchers{
   }
 
   test (" User submits registration form without entering data") {
-    var fakeRequest = FakeRequest()
 
-    val result = controllers.UserRegistration.submitUserRegistration()(fakeRequest)
+    val result = controllers.UserRegistration.submitUserRegistration()(FakeRequest())
 
     Helpers.status(result).should(equal(Http.Status.BAD_REQUEST))
   }
-/*
+
   test (" User submits registration form by providing valid data") {
 
-//    val requestValues = Map("firstName" -> "Stephen", "surname" -> "Butler" , "email" -> "sbutler@gmail.com" , "confirmEmail" -> "sbutler@gmail.com" , "password" -> "password1" , "confirmPassword"-> "password1")
-
-//    val reqValues = Tuple6 ("firstName" -> "Stephen", "surname" -> "Butler" , "email" -> "sbutler@gmail.com" , "confirmEmail" -> "sbutler@gmail.com" , "password" -> "password1" , "confirmPassword"-> "password1")
-//    val fakeRequest = FakeRequest(POST, "/").withFormUrlEncodedBody(reqValues)
-
-//    println(rq)
-    val fakeRequest = FakeRequest(POST, "/").withFormUrlEncodedBody("firstName" -> "Stephen", "surname" -> "Butler" , "email" -> "sbutler@gmail.com" , "confirmEmail" -> "sbutler@gmail.com" , "password" -> "password1" , "confirmPassword"-> "password1")
+    // submit all fields filled with proper data
+    val fakeRequest = FakeRequest(POST, "/register").withFormUrlEncodedBody(
+        "firstName" -> "Stephen", 
+        "surname" -> "Butler" , 
+        "email" -> "sbutler@gmail.com" , 
+        "confirmEmail" -> "sbutler@gmail.com" , 
+        "password" -> "password1" , 
+        "confirmPassword"-> "password1",
+        "tconditions" -> "true"
+    )
     val result = controllers.UserRegistration.submitUserRegistration()(fakeRequest)
 
+    // upon submission expect redirect to the login page 
     status(result).should(equal(Http.Status.SEE_OTHER))
 
-    redirectLocation(result).should(equal(Some("/login")))
+    import org.scalatest.OptionValues._
+    redirectLocation(result).value should(equal("/login"))
   }
-*/
+
 }
