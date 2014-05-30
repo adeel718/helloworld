@@ -16,6 +16,9 @@ public class User extends Model {
 	@Formats.NonEmpty
 	private String userName;
 	
+	@Required
+	private String password;
+	
 	private String email;
 	
 	private String firstName;
@@ -71,4 +74,14 @@ public class User extends Model {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
 }

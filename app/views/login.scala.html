@@ -1,17 +1,18 @@
 @* login Template File *@
-@(user: Form[User])
+@(user: play.data.Form[User])
 
 @username = @{user("userName")}
+@password = @{user("password")}
 
 @main("Please sign in"){
     
     @if(user.hasErrors){
-	<div class="validation-summary">
+	<div id="validation-summary" class="validation-summary">
 		<h1>Please check the form</h1>
 		<ul>
 	     @for((_, errorsList) <- user.errors){
 	     	@for(error <- errorsList){
-	          <li><a href="#error1">@error.message</a></li>
+	          <li><a href="#error@error.key">@error.message</a></li>
 	     	}
 	     }
 		</ul>
@@ -21,12 +22,25 @@
     @helper.form(routes.Application.loginSubmit) {
          <div @if(username.error.isDefined) { class="validation" }>
          @username.error.map{ e => 
-            <span id="error1" class="validation-message">@e.message</span>
+            <span id="error@username.name" class="validation-message">@e.message</span>
          }
          @helper.inputText(username,
              '_label -> "Username", 
              'size -> 30, 'maxlength -> 30, 
              'placeholder -> "User name here", 
+             '_showConstraints -> true,
+             '_showErrors -> false
+             )
+          </div>
+         <br>
+         <div @if(password.error.isDefined) { class="validation" }>
+         @password.error.map{ e => 
+            <span id="error@password.name" class="validation-message">@e.message</span>
+         }
+         @helper.inputPassword(password,
+             '_label -> "Password", 
+             'size -> 30, 'maxlength -> 30, 
+             'placeholder -> "Password here", 
              '_showConstraints -> true,
              '_showErrors -> false
              )
