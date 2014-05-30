@@ -23,8 +23,8 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-	/*@Test
-	public void myTest(){
+	@Test
+	public void checkHeaderAndFooterContent(){
 		driver.navigate().to(getBaseURL());
 		
 		//Main Verification Tests
@@ -57,7 +57,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 	}
 		
     @Test
-    public void registrationTests(){
+    public void registrationCheckLabelsAndFieldsPresent(){
 
         driver.navigate().to(getBaseURL() + "/register");
         //Registration Page Tests
@@ -100,17 +100,17 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 
         String verifyRegPasswordPwordExp = "Password:";
         String verifyRegPasswordPwordAct = driver.findElement(By.id("passwordP")).getText();
-        assertEquals(verifyRegPasswordPwordExp, verifyRegPasswordPwordAct);
+        assertTrue("Could not find Password Field", verifyRegPasswordPwordAct.contains(verifyRegPasswordPwordExp));
 
         String verifyRegPasswordReExp = "Re-enter Password:";
         String verifyRegPasswordReAct = driver.findElement(By.id("confirmPasswordP")).getText();
         assertEquals(verifyRegPasswordReExp, verifyRegPasswordReAct);
 
-        String verifyRegTandCTitleExp = "Terms and Conditions";
+        String verifyRegTandCTitleExp = "Terms & Conditions";
         String verifyRegTandCTitleAct = driver.findElement(By.id("termsTitle")).getText();
         assertEquals(verifyRegTandCTitleExp, verifyRegTandCTitleAct);
 
-        String verifyRegTandCDescExp = "Before registering, please read our Terms and Conditions";
+        String verifyRegTandCDescExp = "Before registering, please read our Terms & Conditions";
         String verifyRegTandCDescAct = driver.findElement(By.id("TermsSubHeading")).getText();
         assertEquals(verifyRegTandCDescExp, verifyRegTandCDescAct);
 
@@ -122,19 +122,19 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
     }
 		
     @Test
-    public void linkTests(){
+    public void registrationCheckLinks(){
         driver.navigate().to(getBaseURL() + "/register");
 
         //Links Navigation Tests
         driver.findElement(By.cssSelector("img[alt=\'OGL\']")).click();
         assertEquals("Open Government Licence", driver.getTitle());
         driver.navigate().back();
-        assertTrue(driver.getCurrentUrl().endsWith(getBaseURL()));
+        assertTrue("Did not go to register page 1", driver.getCurrentUrl().endsWith(getBaseURL() + "/register"));
 
         driver.findElement(By.xpath("./*//*[@id='logo']/span")).click();
         assertEquals("Welcome to GOV.UK", driver.getTitle());
         driver.navigate().back();
-        assertTrue(driver.getCurrentUrl().endsWith(getBaseURL()));
+        assertTrue("Did not go to register page 2", driver.getCurrentUrl().endsWith(getBaseURL() + "/register"));
 
 //			    driver.findElement(By.linkText("Login")).click();	     
 //			    assertEquals("Please sign in", driver.getTitle());
@@ -142,103 +142,140 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
         driver.findElement(By.linkText("Open Government Licence v2.0")).click();
         assertEquals("Open Government Licence", driver.getTitle());
         driver.navigate().back();
-        assertEquals("Please sign in", driver.getTitle());
+        assertEquals("Account Registration", driver.getTitle());
 
         driver.findElement(By.linkText("© Crown Copyright")).click();
         assertEquals("Crown copyright | The National Archives", driver.getTitle());
         driver.navigate().back();
-        assertEquals("Please sign in", driver.getTitle());
+        assertEquals("Account Registration", driver.getTitle());
 
         driver.findElement(By.linkText("Find out more about cookies")).click();
         assertEquals("Cookies - GOV.UK", driver.getTitle());
         driver.navigate().back();
-        assertEquals("Please sign in", driver.getTitle());
+        assertEquals("Account Registration", driver.getTitle());
 
         driver.findElement(By.id("proposition-name")).click();
-        assertTrue(driver.getCurrentUrl().endsWith(getBaseURL()));
+        assertTrue("Did not go to login page", driver.getCurrentUrl().endsWith(getBaseURL() + "/login"));
 
     }
 
     @Test
-    public void checkValidationMessages() {
+    public void registrationCheckValidationMessages() {
         driver.navigate().to((getBaseURL() + "/register"));
 
         // Submit blank
         driver.findElement(By.id("submitBtn")).click();
 
-        String validationMsgFirstNameExp = "firstName should not be empty, please enter a value";
-        String validationMsgFirstNameAct = driver.findElement(By.id("error1")).getText();
+        String validationMsgFirstNameExp = "firstName should not be empty Please enter.";
+        String validationMsgFirstNameAct = driver.findElement(By.id("errorfirstName")).getText();
         assertEquals(validationMsgFirstNameExp, validationMsgFirstNameAct);
 
-        String validationMsgSurnameExp = "surName should not be empty, please enter a value";
-        String validationMsgSurnameAct = driver.findElement(By.id("error2")).getText();
+        String validationMsgSurnameExp = "surname should not be empty Please enter.";
+        String validationMsgSurnameAct = driver.findElement(By.id("errorsurname")).getText();
         assertEquals(validationMsgSurnameExp, validationMsgSurnameAct);
 
-        String validationMsgEmailExp = "Email should not be empty, please enter a value";
-        String validationMsgEmailAct = driver.findElement(By.id("error3")).getText();
+        String validationMsgEmailExp = "email should not be empty Please enter valid email.";
+        String validationMsgEmailAct = driver.findElement(By.id("erroremail")).getText();
         assertEquals(validationMsgEmailExp, validationMsgEmailAct);
 
-        String validationMsgConfirmEmailExp = "Please confirm email";
-        String validationMsgConfirmEmailAct = driver.findElement(By.id("error4")).getText();
+        String validationMsgConfirmEmailExp = "Please confirm email.";
+        String validationMsgConfirmEmailAct = driver.findElement(By.id("errorconfirmEmail")).getText();
         assertEquals(validationMsgConfirmEmailExp, validationMsgConfirmEmailAct);
 
-        String validationMsgPasswordExp = "password should not be empty, please enter a value";
-        String validationMsgPasswordAct = driver.findElement(By.id("error5")).getText();
+        String validationMsgPasswordExp = "password should not be empty Please enter.";
+        String validationMsgPasswordAct = driver.findElement(By.id("errorpassword")).getText();
         assertEquals(validationMsgPasswordExp, validationMsgPasswordAct);
 
-        String validationMsgConfirmPasswordExp = "Please confirm password";
-        String validationMsgConfirmPasswordAct = driver.findElement(By.id("error6")).getText();
+        String validationMsgConfirmPasswordExp = "Please confirm entered password.";
+        String validationMsgConfirmPasswordAct = driver.findElement(By.id("errorconfirmPassword")).getText();
         assertEquals(validationMsgConfirmPasswordExp, validationMsgConfirmPasswordAct);
 
-        String validationMsgTermsExp = "Please accept terms & conditions";
-        String validationMsgTermsAct = driver.findElement(By.id("error7")).getText();
-        assertEquals(validationMsgTermsExp, validationMsgTermsAct);
-    }*/
+        /*String validationMsgTermsExp = "Please accept terms & conditions";
+        String validationMsgTermsAct = driver.findElement(By.id("errortconditions")).getText();
+        assertEquals(validationMsgTermsExp, validationMsgTermsAct);*/
+    }
 
     @Test
-    public void loginSuccessUserFound() {
+    public void loginSuccessUserAndPasswordFound() {
         driver.navigate().to((getBaseURL() + "/login"));
 
         String urlExpectedLogin = "/login";
         String urlActual = driver.getCurrentUrl();
 
-        assertTrue(urlActual.contains(urlExpectedLogin));
+        assertTrue("Did not go to login page", urlActual.contains(urlExpectedLogin));
 
         WebElement usernameField = driver.findElement(By.id("userName"));
-        usernameField.sendKeys("bob@example.com");
+        usernameField.sendKeys("andy@andy.com");
+        WebElement passwordField = driver.findElement(By.id("password"));
+        passwordField.sendKeys("12345678");
 
         driver.findElement(By.name("submitBtn")).click();
 
         urlActual = driver.getCurrentUrl();
-        String urlExpectedWelcome = "/welcome";
+        String urlExpectedWelcome = getBaseURL() + "/welcome";
 
-        assertTrue(urlActual.contains(urlExpectedWelcome));
+        assertEquals(urlExpectedWelcome, urlActual);
+        //assertTrue(urlActual.contains(urlExpectedWelcome));
     }
 
     @Test
-    public void loginFailUserNotFound() {
+    public void loginFailUserAndPasswordNotFound() {
         driver.navigate().to((getBaseURL() + "/login"));
-
-        String urlExpectedLogin = "/login";
-        String urlActual = driver.getCurrentUrl();
-
-        assertTrue(urlActual.contains(urlExpectedLogin));
 
         WebElement usernameField = driver.findElement(By.id("userName"));
         usernameField.sendKeys("nouserfound@example.com");
+        WebElement passwordField = driver.findElement(By.id("password"));
+        passwordField.sendKeys("incorrectpassword");
 
         driver.findElement(By.name("submitBtn")).click();
 
-        assertTrue(urlActual.contains(urlExpectedLogin));
+        String urlExpectedLogin = getBaseURL() + "/login";
+        String urlActual = driver.getCurrentUrl();
+        assertEquals(urlExpectedLogin, urlActual);
+        //assertTrue(urlActual.contains(urlExpectedLogin));
 
-        String userNotFoundAct = driver.findElement(By.id("validation-summary")).getText();
-        String userNotFoundExp = "The username was not found. Please try again.";
-        assertTrue(userNotFoundAct.contains(userNotFoundExp));
+        String validationAct = driver.findElement(By.id("validation-summary")).getText();
+        String userNotFoundExp = "The username/password was not found. Please try again.";
+        assertTrue("Validation not found for No username in DB", validationAct.contains(userNotFoundExp));
+
+    }
+
+    @Test
+    public void loginFailUserFoundPasswordNotFound() {
+        driver.navigate().to((getBaseURL() + "/login"));
+
+        String urlExpectedLogin = getBaseURL() + "/login";
+        String urlActual = driver.getCurrentUrl();
+
+        assertEquals(urlExpectedLogin, urlActual);
+
+        WebElement usernameField = driver.findElement(By.id("userName"));
+        usernameField.sendKeys("andy@andy.com");
+        WebElement passwordField = driver.findElement(By.id("password"));
+        passwordField.sendKeys("incorrectpassword");
+
+        driver.findElement(By.name("submitBtn")).click();
+
+        urlActual = driver.getCurrentUrl();
+        urlExpectedLogin = getBaseURL() + "/login";
+        assertEquals(urlExpectedLogin, urlActual);
+        //assertTrue(urlActual.contains(urlExpectedWelcome));
+
+        String validationAct = driver.findElement(By.id("validation-summary")).getText();
+        String passNotFoundExp = "The password was incorrect. Please try again.";
+        assertTrue("Validation not found: password incorrect", validationAct.contains(passNotFoundExp));
     }
 
     @Test
     public void registerSuccess() {
-        driver.navigate().to((getBaseURL() + "/register"));
+        driver.navigate().to((getBaseURL() + "/login"));
+
+        driver.findElement(By.id("registerLink")).click();
+
+        String urlExpectedRegister = getBaseURL() + "/register";
+        String urlActualRegister = driver.getCurrentUrl();
+
+        assertEquals(urlExpectedRegister, urlActualRegister);
 
         driver.findElement(By.name("firstName")).sendKeys("Andy");
         driver.findElement(By.name("surname")).sendKeys("Burdis");
@@ -251,10 +288,11 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 
         driver.findElement(By.name("submitBtn")).click();
 
-        String urlExpectedWelcome = "/welcome";
-        String urlActual = driver.getCurrentUrl();
+        String urlExpectedWelcome = getBaseURL() + "/welcome";
+        String urlActualWelcome = driver.getCurrentUrl();
 
-        assertTrue(urlActual.contains(urlExpectedWelcome));
+        assertEquals(urlExpectedWelcome, urlActualWelcome);
+        //assertTrue(urlActual.contains(urlExpectedWelcome));
     }
 
     @Test
@@ -272,15 +310,16 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 
         driver.findElement(By.name("submitBtn")).click();
 
-        String urlExpectedLogin = "/login";
+        String urlExpectedLogin = getBaseURL() + "/login";
         String urlActual = driver.getCurrentUrl();
 
-        assertTrue(urlActual.contains(urlExpectedLogin));
+        assertEquals(urlExpectedLogin, urlActual);
+        //assertTrue(urlActual.contains(urlExpectedLogin));
 
         String errorConfirmPasswordExp = "The confirmation password you have entered does not match. Please try again";
         String errorConfirmPasswordAct = driver.findElement(By.id("validation-summary")).getText();
 
-        assertTrue(errorConfirmPasswordAct.contains(errorConfirmPasswordExp));
+        assertTrue("Validation not found: Incorrect confirm password", errorConfirmPasswordAct.contains(errorConfirmPasswordExp));
     }
 
     @Test
@@ -298,15 +337,44 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 
         driver.findElement(By.name("submitBtn")).click();
 
-        String urlExpectedLogin = "/login";
+        String urlExpectedLogin = getBaseURL() + "/login";
         String urlActual = driver.getCurrentUrl();
 
-        assertTrue(urlActual.contains(urlExpectedLogin));
+        assertEquals(urlExpectedLogin, urlActual);
+        //assertTrue(urlActual.contains(urlExpectedLogin));
 
         String errorConfirmEmailExp = "The confirmation email you have entered does not match. Please try again";
         String errorConfirmEmailAct = driver.findElement(By.id("validation-summary")).getText();
 
-        assertTrue(errorConfirmEmailAct.contains(errorConfirmEmailExp));
+        assertTrue("Validation not found: Incorrect confirm email", errorConfirmEmailAct.contains(errorConfirmEmailExp));
+    }
+
+    @Test
+    public void registerTermsNotChecked() {
+        driver.navigate().to((getBaseURL() + "/register"));
+
+        driver.findElement(By.name("firstName")).sendKeys("Andy");
+        driver.findElement(By.name("surname")).sendKeys("Burdis");
+        driver.findElement(By.name("email")).sendKeys("andy2@andy.com");
+        driver.findElement(By.name("confirmEmail")).sendKeys("andy2@andy.com");
+        driver.findElement(By.name("password")).sendKeys("12345678");
+        driver.findElement(By.name("confirmPassword")).sendKeys("12345678");
+
+        // NOTE: We do not checkbox the terms
+        //driver.findElement(By.id("tconditions")).click();
+
+        driver.findElement(By.name("submitBtn")).click();
+
+        String urlExpectedLogin = getBaseURL() + "/login";
+        String urlActual = driver.getCurrentUrl();
+
+        assertEquals(urlExpectedLogin, urlActual);
+        //assertTrue(urlActual.contains(urlExpectedLogin));
+
+        String errorCheckTermsExp = "Please accept terms & conditions";
+        String errorCheckTermsAct = driver.findElement(By.id("validation-summary")).getText();
+
+        assertTrue("Validation not found: Terms not checked", errorCheckTermsAct.contains(errorCheckTermsExp));
     }
 		
     @After

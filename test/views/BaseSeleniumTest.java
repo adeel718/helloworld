@@ -16,7 +16,7 @@ public class BaseSeleniumTest {
 	private static TestServer testServer;
 	
 	public static FakeApplication app;
-	private String baseURL = "localhost:9000";
+	private String baseURL = "http://localhost:9000";
 	public WebDriver driver;
 
 	@BeforeClass
