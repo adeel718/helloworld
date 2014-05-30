@@ -110,7 +110,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
         String verifyRegTandCTitleAct = driver.findElement(By.id("termsTitle")).getText();
         assertEquals(verifyRegTandCTitleExp, verifyRegTandCTitleAct);
 
-        String verifyRegTandCDescExp = "Before registering, please read our Terms & Conditions";
+        String verifyRegTandCDescExp = "Before registering, please read our terms & conditions below";
         String verifyRegTandCDescAct = driver.findElement(By.id("TermsSubHeading")).getText();
         assertEquals(verifyRegTandCDescExp, verifyRegTandCDescAct);
 
