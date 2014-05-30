@@ -379,7 +379,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 		
     @After
     public void myAfter(){
-        //driver.quit();
+        driver.quit();
 
     }
 
