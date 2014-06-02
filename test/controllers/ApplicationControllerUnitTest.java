@@ -1,18 +1,21 @@
 package controllers;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.junit.Test;
 
 import play.mvc.Http;
 import play.mvc.Result;
 import play.test.FakeRequest;
 import play.test.Helpers;
+import util.JsoupUtils;
+import util.TestUtils;
 
 public class ApplicationControllerUnitTest {
 	
@@ -22,61 +25,37 @@ public class ApplicationControllerUnitTest {
 //		System.out.println(result.getWrappedResult().toString());
 		String s = Helpers.contentAsString(result);
 		assertTrue((s).contains("Please sign in")); // should render login page
-		assertOk(result);
-	}
-	
-	@Test
-	public void controllerShouldRenderWelcomeViewOnSubmit() {
-		// create a fake request
-	    FakeRequest fakeRequest = new FakeRequest("POST", "/login");
-	    // create an Hashmap for data
-	    Map<String, String> data = new HashMap<String, String>();
-	    data.put("userName", "Adeel");
-		Result result = Helpers.callAction(controllers.routes.ref.Application.loginSubmit(), fakeRequest.withFormUrlEncodedBody(data));
-		
-		String s = Helpers.contentAsString(result);
-		assertTrue((s).contains("Hello Adeel")); // should render welcome page
-		assertOk(result);
+		TestUtils.assertStatusOK(result);
 	}
 	
 	@Test
 	public void controllerShouldValidateOnSubmit() {
 		final String username = "";
-		assertNotValid(username);
+		assertNotValidUsername(username);
 	}
 
 	@Test
 	public void controllerShouldValidateBlankSpacesOnSubmit() {
 		final String username = "  ";
-		assertNotValid(username);
+		assertNotValidUsername(username);
 	}
 
-	private void assertNotValid(final String username) {
+	// TODO: Move to integration test
+	private void assertNotValidUsername(final String username) {
 		// create a fake request
 	    FakeRequest fakeRequest = new FakeRequest("POST", "/login");
 	    // create an Hashmap for data
 	    Map<String, String> data = new HashMap<String, String>();
 	    data.put("userName", username);
 	    final Result result = Helpers.callAction(controllers.routes.ref.Application.loginSubmit(), fakeRequest.withFormUrlEncodedBody(data));
+
+	    TestUtils.assertStatusBadRequest(result); // should indicate an erroneous submission
 		
-		final String s = Helpers.contentAsString(result);
-		assertTrue((s).contains("Please sign in")); // should render login page
-		assertTrue(s.contains("value=\"" + username + "\"")); // should prepopulate the username input field
-		assertContainsTwice(s, "Please enter the user name field and it should not be blank"); // should show error in summary and the input field
-		assertThat(Helpers.status(result)).isEqualTo(Http.Status.BAD_REQUEST); // should indicate an erroneous submission
-	}
-	
-	private void assertContainsTwice(String html, String errorMessage) {
-		assertNotNull(errorMessage);
-		final int firstIndexOf = html.indexOf(errorMessage);
-		assertThat(firstIndexOf).isPositive();
-		final int secondIndexOf = html.substring(firstIndexOf + errorMessage.length()).indexOf(errorMessage);
-		assertThat(secondIndexOf).isPositive();
-	}
-	
-	private void assertOk(Result result) {
-		assertNotNull(result);
-		assertThat(Helpers.status(result)).isEqualTo(Http.Status.OK);
+		final String html = Helpers.contentAsString(result);
+		assertTrue((html).contains("Please sign in")); // should render login page
+
+		final Document doc = Jsoup.parse(html);
+		JsoupUtils.assertErrorPresent("userName", "Please enter the user name field and it should not be blank", doc);
 	}
 	
 	////////////////////////////////////////////////////////////////////////////
@@ -86,8 +65,7 @@ public class ApplicationControllerUnitTest {
 		final Result result = Application.index();
 		
 		// index should redirect to /login
-		assertThat(Helpers.status(result)).isEqualTo(Http.Status.SEE_OTHER);
-		assertThat(Helpers.redirectLocation(result)).isEqualTo("/login");
+		TestUtils.assertRedirect(result, "/login");
 	}
 	
 	

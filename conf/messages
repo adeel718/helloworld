@@ -5,3 +5,5 @@ error.email.required=email should not be empty Please enter valid email.
 error.confirmEmail.required=Please confirm email.
 error.confirmPassword.required=Please confirm entered password.
 error.tconditions.required=Please accept terms & conditions
+
+error.login.unknown.user=The entered username and/or password is not correct
