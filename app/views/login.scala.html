@@ -20,35 +20,43 @@
 	}
     
     @helper.form(routes.Application.loginSubmit) {
-         <div @if(username.error.isDefined) { class="validation" }>
-         @username.error.map{ e => 
-            <span id="error@username.name" class="validation-message">@e.message</span>
-         }
-         @helper.inputText(username,
-             '_label -> "Username", 
-             'size -> 30, 'maxlength -> 30, 
-             'placeholder -> "User name here", 
-             '_showConstraints -> true,
-             '_showErrors -> false
-             )
-          </div>
-         <br>
-         <div @if(password.error.isDefined) { class="validation" }>
-         @password.error.map{ e => 
-            <span id="error@password.name" class="validation-message">@e.message</span>
-         }
-         @helper.inputPassword(password,
-             '_label -> "Password", 
-             'size -> 30, 'maxlength -> 30, 
-             'placeholder -> "Password here", 
-             '_showConstraints -> true,
-             '_showErrors -> false
-             )
-          </div>
-        
-        <div class="clear"/>
-        <br/> 
-        <input type="reset" name="resetBtn"/>
-        <input type="submit" name="submitBtn" value = "Sign In"/>
+    	<div id="form-style" class="left login">
+	         <div @if(username.error.isDefined) { class="validation" }>
+	         @username.error.map{ e => 
+	            <span id="error@username.name" class="validation-message">@e.message</span>
+	         }
+	         @helper.inputText(username,
+	             '_label -> "Username", 
+	             'size -> 30, 'maxlength -> 30, 
+	             'placeholder -> "User name here", 
+	             '_showConstraints -> true,
+	             '_showErrors -> false
+	             )
+	          </div>
+	         <br>
+	         <div @if(password.error.isDefined) { class="validation" }>
+	         @password.error.map{ e => 
+	            <span id="error@password.name" class="validation-message">@e.message</span>
+	         }
+	         @helper.inputPassword(password,
+	             '_label -> "Password", 
+	             'size -> 30, 'maxlength -> 30, 
+	             'placeholder -> "Password here", 
+	             '_showConstraints -> true,
+	             '_showErrors -> false
+	             )
+	          </div>
+	        
+	        <div class="clear"/>
+	        <br/>
+	    
+	        <div class="form-group">
+              	<input class="button" type="submit" name="submitBtn" value = "Sign In"/>
+	        	<br/>
+	        	<p><a href="#">Reset</a></p>
+            </div>
+	        
+	        
+		</div>
     }
 }
