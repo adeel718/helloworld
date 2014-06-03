@@ -24,14 +24,12 @@ class RegistrationDAOTest extends FunSuite with Matchers{
       password="password")
     RegisteredUserDAO.insert(userRegistration)
 
-   RegistrationTestDBUtil.findOne(MongoDBObject("_id" -> userRegistration.email, "password" -> userRegistration.password)).value.shouldEqual(userRegistration)
+   val actualData = RegistrationTestDBUtil.findOne(MongoDBObject("_id" -> userRegistration.email, "password" -> userRegistration.password)).value
 
-  }
-
-
-  test ("Verify User Registration")
-  {
-    fail("Not yet Impletemented")
+    actualData.email shouldEqual userRegistration.email
+    actualData.surname shouldEqual userRegistration.surname
+    actualData.firstName shouldEqual userRegistration.firstName
+    actualData.password shouldEqual userRegistration.password
 
   }
 
