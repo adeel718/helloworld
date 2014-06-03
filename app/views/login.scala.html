@@ -6,6 +6,12 @@
 
 @main("Please sign in"){
     
+    @if(flash.contains("message")) {
+        <div id="message" class="message success">
+            @flash.get("message")
+        </div>
+    }
+    
     @if(user.hasErrors){
 	<div id="validation-summary" class="validation-summary">
 		<h1>Please check the form</h1>

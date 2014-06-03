@@ -288,10 +288,15 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 
         driver.findElement(By.name("submitBtn")).click();
 
-        String urlExpectedWelcome = getBaseURL() + "/welcome";
-        String urlActualWelcome = driver.getCurrentUrl();
+        String urlExpectedLogin = getBaseURL() + "/login";
+        String urlActualLogin = driver.getCurrentUrl();
 
-        assertEquals(urlExpectedWelcome, urlActualWelcome);
+        assertEquals(urlExpectedLogin, urlActualLogin);
+        
+        String urlExpMessage = "Registration was successful, use the form below to login";
+        String urlActMessage = driver.findElement(By.id("message")).getText();
+        assertTrue("Register Success message not shown on login", urlActMessage.contains(urlExpMessage));
+        
         //assertTrue(urlActual.contains(urlExpectedWelcome));
     }
 

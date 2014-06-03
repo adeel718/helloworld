@@ -37,9 +37,10 @@ object UserRegistration extends Controller {
       },
       userData => {
         //top be coded for later sprint i.er. to submit registration data to database
-        val userRegistration = registrationForm.get
-        Redirect(routes.Application.login())
+        val Registration(firstName, surname, email, _, password, _, _) = userData
+        Redirect(routes.Application.login()).flashing(
+            "message" -> "Registration was successful, use the form below to login"
+        )
       })
-}
-
+  }
 }
