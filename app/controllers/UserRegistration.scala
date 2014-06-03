@@ -13,8 +13,8 @@ import play.api.i18n.Messages
  */
 object UserRegistration extends Controller {
 
-  val form =Form( mapping( "firstName" -> text.verifying(Messages("error.registration.field.required", "firstName"), {!_.isEmpty}),
-    "surname" -> text.verifying(Messages("error.registration.field.required", "surname"), {!_.isEmpty}),
+  val form =Form( mapping( "firstName" -> text.verifying(Messages("error.registration.field.required", "First Name"), {!_.isEmpty}),
+    "surname" -> text.verifying(Messages("error.registration.field.required", "Surname"), {!_.isEmpty}),
     "email" -> text.verifying(Messages("error.email.required"), {!_.isEmpty}) ,
     "confirmEmail" -> text.verifying(Messages("error.confirmEmail.required"), {!_.isEmpty}) ,
      "password" -> text.verifying(Messages("error.registration.field.required", "password"), {!_.isEmpty}) ,
