@@ -2,7 +2,9 @@ package controllers;
 
 import static play.data.Form.form;
 import models.User;
+import models.UserDaoUtils;
 import play.data.Form;
+import play.i18n.Messages;
 import play.mvc.*;
 import views.html.*;
 
@@ -23,8 +25,18 @@ public class Application extends Controller {
 			return badRequest(login.render(form));
 		}
 		
-		String username = form.get().getUserName();
-		return ok(welcome.render(username));
+		final User user = form.get();
+		final String username = user.getUserName();
+		final String password = user.getPassword();
+		if(!UserDaoUtils.isUserExist(username, password)) {
+			final String msgKey = "error.login.unknown.user";
+			form.reject("userName", Messages.get(msgKey));
+			form.reject("password", Messages.get(msgKey));
+			return badRequest(login.render(form));
+		}
+		
+		
+		return redirect(routes.Welcome.index(username));
 	}
     
 }

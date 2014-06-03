@@ -103,12 +103,15 @@
                     }
                     <textarea cols="90" rows="3" id="terms" class="big" disabled="disabled" placeholder="Terms go here"></textarea>
                         <p id="TermsP" class="option group">
-                            <label id="agreeCbxLabel" for="tconditions"><input id="tconditions" type="checkbox" > I agree with Terms & Conditions</label>
+                            <label id="agreeCbxLabel" for="tconditions"><input id="tconditions" name="tconditions" value="true" type="checkbox" > I agree with Terms & Conditions</label>
                         </p>
                 </div>
 			</fieldset>
-
-            <input type="submit" id="submitBtn" value = "Proceed>>"/>
+			
+			<div class="form-group">
+              	<input class="button" type="submit" name="submitBtn" id="submitBtn" value = "Proceed>>"/>
+            </div>
+            
 		</div>
     }
 }

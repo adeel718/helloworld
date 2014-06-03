@@ -149,8 +149,13 @@ dl dd input {
 #form-style.left input, #form-style.left select, #form-style.left textarea, #form-style.left .uneditable-field {
 	display: -moz-inline-stack;
 	display: inline-block;
-	margin: 0 0.5em;
+	margin: 0 0em 0.5em 0;
 }
+
+#form-style.login label {
+	min-width:6.0em !important;
+}
+
 
 .hint {
 	clear: left;

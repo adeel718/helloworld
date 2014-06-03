@@ -91,6 +91,7 @@ validation-summary a:hover {
         <h1>Please check the form</h1>
         <ul>
           <li><a href="#error1">Please enter the user name field and it should not be blank</a></li>
+          <li><a href="#error2">Please enter the password field</a></li>
         </ul>
 </div>
 
@@ -102,21 +103,40 @@ validation-summary a:hover {
 	<label for="username">Username</label>
 	<input id="username" class="name" type="text" size="30" maxlength="30" placeholder="User name here"> *
 </p>
+<p class="validation">
+    <span><i>Input field error message area.</i></span>
+	<span id="error2" class="validation-message">Please enter the password field</span>
+	<label for="password">Password</label>
+	<input id="password" class="password" type="password" size="30" maxlength="30" placeholder="Password here"> *
+</p>
 <button>Reset</button>
 <button>Sign In</button>
 
 <hr>
 <p>
 <i>
-Input a username, press ENTER key or push "Sign In" button - username submitted to server.
+Input a username and password, press ENTER key or push "Sign In" button - input data submitted to server.
 <br>
 Press "Reset" button - the input fields are reset to values initially rendered.
 <br>
 <br>
-Validation rules: username non empty (contains at least 1 visible character) 
+Validation rules:
+<ul>
+	<li>username non empty (contains at least 1 visible character)</li> 
+	<li>username must exist in users DB</li>
+	<li>password required</li> 
+	<li>password must match the stored one for the given user</li>
+</ul> 
 <br>
 Validation OK: show "Welcome screen" 
 <br>
-Validation Fails: show the same "Login screen" with username field populated from user input and error message <b style="color: red">Please enter the user name field and it should not be blank</b>
+Validation Fails: show the same "Login screen" with fields populated from user input and appropriate error messages:
+<b style="color: red">
+	<ul> 
+		<li>Please enter the user name field and it should not be blank</li>
+		<li>Please enter the password field</li>
+		<li>The entered username and/or password is not correct</li>
+	</ul>
+</b>
 </i>
 </p>
