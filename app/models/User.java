@@ -16,7 +16,7 @@ public class User extends Model {
 	@Formats.NonEmpty
 	private String userName;
 	
-	@Required
+	@Required(message="Please enter the password field and it should not be blank")
 	private String password;
 	
 	private String email;

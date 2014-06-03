@@ -16,17 +16,27 @@
 	<div id="validation-summary" class="validation-summary">
 		<h1>Please check the form</h1>
 		<ul>
+		 @{var i = 0}
 	     @for((_, errorsList) <- user.errors){
+	     	
 	     	@for(error <- errorsList){
 	          <li><a href="#error@error.key">@error.message</a></li>
+	          
 	     	}
 	     }
+	     
+	     
 		</ul>
 	</div>	
 	}
+	
+	@if(flash.contains("registerLink")) {
+        <a id="registerLinkLoginForm" href="@routes.UserRegistration.index()">@flash.get("registerLink")</a>
+        <br/>
+    }
     
     @helper.form(routes.Application.loginSubmit) {
-    	<div id="form-style" class="left login">
+    	<div id="form-style" class="left login>
 	         <div @if(username.error.isDefined) { class="validation" }>
 	         @username.error.map{ e => 
 	            <span id="error@username.name" class="validation-message">@e.message</span>
