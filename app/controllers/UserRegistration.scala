@@ -3,11 +3,10 @@ package controllers
 import play.api.mvc.{Action, Result, Controller}
 import play.api.data.Form
 import play.api.data.Forms._
-import models.{User, Registration}
+import models.{RegisteredUser, User, Registration, RegisteredUserDAO}
 import views.html.{register, login}
 import play.data.Form._
 import play.api.i18n.Messages
-import models.RegisteredUserDAO
 
 /**
  * Created by user02 on 5/20/14.
@@ -38,6 +37,9 @@ object UserRegistration extends Controller {
       userData => {
         //top be coded for later sprint i.er. to submit registration data to database
         val Registration(firstName, surname, email, _, password, _, _) = userData
+
+        val registeredUser =  registrationForm.get
+        RegisteredUserDAO.insert({RegisteredUser(registeredUser.email,registeredUser.firstName, registeredUser.surname,registeredUser.password)})
         Redirect(routes.Application.login()).flashing(
             "message" -> "Registration was successful, use the form below to login"
         )
