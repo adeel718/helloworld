@@ -1,7 +1,7 @@
 constraint.required=*
 
 error.registration.field.required={0} should not be empty Please enter.
-error.email.required=email should not be empty Please enter valid email.
+error.email.required=Email should not be empty Please enter valid email.
 error.confirmEmail.required=Please confirm email.
 error.confirmPassword.required=Please confirm entered password.
 error.tconditions.required=Please accept terms & conditions
