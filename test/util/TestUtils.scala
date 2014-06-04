@@ -21,5 +21,6 @@ object TestUtils {
 	  assertStatus(result, play.mvc.Http.Status.SEE_OTHER)
 	  play.test.Helpers.redirectLocation(result) should equal(expectedLocation)
 	}
+
   
 }

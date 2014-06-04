@@ -32,6 +32,7 @@ public class Application extends Controller {
 			final String msgKey = "error.login.unknown.user";
 			form.reject("userName", Messages.get(msgKey));
 			form.reject("password", Messages.get(msgKey));
+			flash("registerLink", "Are you sure you have registered? Click to register");
 			return badRequest(login.render(form));
 		}
 		
