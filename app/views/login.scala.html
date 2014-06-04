@@ -36,7 +36,7 @@
     }
     
     @helper.form(routes.Application.loginSubmit) {
-    	<div id="form-style" class="left login>
+    	<div id="form-style" class="left login">
 	         <div @if(username.error.isDefined) { class="validation" }>
 	         @username.error.map{ e => 
 	            <span id="error@username.name" class="validation-message">@e.message</span>
