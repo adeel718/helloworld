@@ -31,6 +31,8 @@ class RegistrationDAOTest extends FunSuite with Matchers{
     actualData.firstName shouldEqual userRegistration.firstName
     actualData.password shouldEqual userRegistration.password
 
+    RegistrationTestDBUtil.remove(userRegistration)
+
   }
 
 }
