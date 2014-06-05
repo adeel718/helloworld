@@ -17,7 +17,7 @@ object UserRegistration extends Controller {
     "surname" -> text.verifying(Messages("error.registration.field.required", "Surname"), {!_.isEmpty}),
     "email" -> text.verifying(Messages("error.email.required"), {!_.isEmpty}) ,
     "confirmEmail" -> text.verifying(Messages("error.confirmEmail.required"), {!_.isEmpty}) ,
-     "password" -> text.verifying(Messages("error.registration.field.required", "password"), {!_.isEmpty}) ,
+     "password" -> text.verifying(Messages("error.registration.field.required", "Password"), {!_.isEmpty}) ,
      "confirmPassword" -> text.verifying(Messages("error.confirmPassword.required"), {!_.isEmpty}),
      "tconditions" -> checked(Messages("error.tconditions.required")))
       (Registration.apply)(Registration.unapply))
