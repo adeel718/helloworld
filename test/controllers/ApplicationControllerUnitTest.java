@@ -1,7 +1,7 @@
 package controllers;
 
-import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
+import helper.TestSetup;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
 
-import play.mvc.Http;
+import play.mvc.Http.Context;
 import play.mvc.Result;
 import play.test.FakeRequest;
 import play.test.Helpers;
@@ -21,6 +21,7 @@ public class ApplicationControllerUnitTest {
 	
 	@Test
 	public void controllerShouldRenderLoginView() {
+		Context.current.set(TestSetup.testHttpContext());
 		Result result =	Application.login();
 //		System.out.println(result.getWrappedResult().toString());
 		String s = Helpers.contentAsString(result);

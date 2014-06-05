@@ -1,7 +1,10 @@
 package uk.gov.hmrc;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
+import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -14,13 +17,20 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
+
+import util.TestConfigurations;
 import views.BaseSeleniumTest;
-import play.api.i18n.Messages;
 
 public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 	DateFormat formatter; 
 	long d = new Date().getTime();
 	String testEmail = "andy@andy.com"+ d;
+	String password = "12345678";
 	
     @Before
     public void myBefore(){
@@ -119,7 +129,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
         String verifyRegTandCDescAct = driver.findElement(By.id("TermsSubHeading")).getText();
         assertEquals(verifyRegTandCDescExp, verifyRegTandCDescAct);
 
-        String verifyRegBoxTextExp = "I agree with the Terms and Conditions";
+        String verifyRegBoxTextExp = "I agree with Terms & Conditions";
         String verifyRegBoxTextAct = driver.findElement(By.id("TermsP")).getText();
         assertEquals(verifyRegBoxTextExp, verifyRegBoxTextAct);
 
@@ -171,15 +181,15 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
         // Submit blank
         driver.findElement(By.id("submitBtn")).click();
 
-        String validationMsgFirstNameExp = "firstName should not be empty Please enter.";
+        String validationMsgFirstNameExp = "First Name should not be empty Please enter.";
         String validationMsgFirstNameAct = driver.findElement(By.id("errorfirstName")).getText();
         assertEquals(validationMsgFirstNameExp, validationMsgFirstNameAct);
 
-        String validationMsgSurnameExp = "surname should not be empty Please enter.";
+        String validationMsgSurnameExp = "Surname should not be empty Please enter.";
         String validationMsgSurnameAct = driver.findElement(By.id("errorsurname")).getText();
         assertEquals(validationMsgSurnameExp, validationMsgSurnameAct);
 
-        String validationMsgEmailExp = "email should not be empty Please enter valid email.";
+        String validationMsgEmailExp = "Email should not be empty Please enter valid email.";
         String validationMsgEmailAct = driver.findElement(By.id("erroremail")).getText();
         assertEquals(validationMsgEmailExp, validationMsgEmailAct);
 
@@ -187,7 +197,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
         String validationMsgConfirmEmailAct = driver.findElement(By.id("errorconfirmEmail")).getText();
         assertEquals(validationMsgConfirmEmailExp, validationMsgConfirmEmailAct);
 
-        String validationMsgPasswordExp = "password should not be empty Please enter.";
+        String validationMsgPasswordExp = "Password should not be empty Please enter.";
         String validationMsgPasswordAct = driver.findElement(By.id("errorpassword")).getText();
         assertEquals(validationMsgPasswordExp, validationMsgPasswordAct);
 
@@ -202,6 +212,8 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 
     @Test
     public void loginSuccessUserAndPasswordFound() {
+    	saveTestUser();
+    	
         driver.navigate().to((getBaseURL() + "/login"));
 
         String urlExpectedLogin = "/login";
@@ -210,9 +222,10 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
         assertTrue("Did not go to login page", urlActual.contains(urlExpectedLogin));
 
         WebElement usernameField = driver.findElement(By.id("userName"));
-        usernameField.sendKeys("andy@andy.com");
+        final String username = testEmail;
+		usernameField.sendKeys(username);
         WebElement passwordField = driver.findElement(By.id("password"));
-        passwordField.sendKeys("12345678");
+        passwordField.sendKeys(password);
 
         driver.findElement(By.name("submitBtn")).click();
 
@@ -247,6 +260,8 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 
     @Test
     public void loginFailUserFoundPasswordNotFound() {
+    	saveTestUser();
+    	
         driver.navigate().to((getBaseURL() + "/login"));
 
         String urlExpectedLogin = getBaseURL() + "/login";
@@ -255,7 +270,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
         assertEquals(urlExpectedLogin, urlActual);
 
         WebElement usernameField = driver.findElement(By.id("userName"));
-        usernameField.sendKeys("andy@andy.com");
+        usernameField.sendKeys(testEmail);
         WebElement passwordField = driver.findElement(By.id("password"));
         passwordField.sendKeys("incorrectpassword");
 
@@ -285,8 +300,8 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
         driver.findElement(By.name("surname")).sendKeys("Burdis");
         driver.findElement(By.name("email")).sendKeys(testEmail);
         driver.findElement(By.name("confirmEmail")).sendKeys(testEmail);
-        driver.findElement(By.name("password")).sendKeys("12345678");
-        driver.findElement(By.name("confirmPassword")).sendKeys("12345678");
+        driver.findElement(By.name("password")).sendKeys(password);
+        driver.findElement(By.name("confirmPassword")).sendKeys(password);
 
         driver.findElement(By.id("tconditions")).click();
 
@@ -306,24 +321,23 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 
     @Test
     public void registerIncorrectConfirmationPassword() {
-        driver.navigate().to((getBaseURL() + "/register"));
+        final String urlExpectedRegister = getBaseURL() + "/register";
+
+        driver.navigate().to(urlExpectedRegister);
 
         driver.findElement(By.name("firstName")).sendKeys("Andy");
         driver.findElement(By.name("surname")).sendKeys("Burdis");
         driver.findElement(By.name("email")).sendKeys(testEmail);
         driver.findElement(By.name("confirmEmail")).sendKeys(testEmail);
-        driver.findElement(By.name("password")).sendKeys("12345678");
+        driver.findElement(By.name("password")).sendKeys(password);
         driver.findElement(By.name("confirmPassword")).sendKeys("passwordnotmatch");
 
         driver.findElement(By.id("tconditions")).click();
 
         driver.findElement(By.name("submitBtn")).click();
 
-        String urlExpectedLogin = getBaseURL() + "/login";
         String urlActual = driver.getCurrentUrl();
-
-        assertEquals(urlExpectedLogin, urlActual);
-        //assertTrue(urlActual.contains(urlExpectedLogin));
+        assertEquals(urlExpectedRegister, urlActual);
 
         String errorConfirmPasswordExp = "The confirmation password you have entered does not match. Please try again";
         String errorConfirmPasswordAct = driver.findElement(By.id("validation-summary")).getText();
@@ -333,24 +347,24 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 
     @Test
     public void registerIncorrectConfirmationEmail() {
-        driver.navigate().to((getBaseURL() + "/register"));
+        final String urlExpectedRegister = getBaseURL() + "/register";
+
+        driver.navigate().to(urlExpectedRegister);
 
         driver.findElement(By.name("firstName")).sendKeys("Andy");
         driver.findElement(By.name("surname")).sendKeys("Burdis");
         driver.findElement(By.name("email")).sendKeys(testEmail);
         driver.findElement(By.name("confirmEmail")).sendKeys("incorrect@email.com");
-        driver.findElement(By.name("password")).sendKeys("12345678");
-        driver.findElement(By.name("confirmPassword")).sendKeys("12345678");
+        driver.findElement(By.name("password")).sendKeys(password);
+        driver.findElement(By.name("confirmPassword")).sendKeys(password);
 
         driver.findElement(By.id("tconditions")).click();
 
         driver.findElement(By.name("submitBtn")).click();
 
-        String urlExpectedLogin = getBaseURL() + "/login";
         String urlActual = driver.getCurrentUrl();
 
-        assertEquals(urlExpectedLogin, urlActual);
-        //assertTrue(urlActual.contains(urlExpectedLogin));
+        assertEquals(urlExpectedRegister, urlActual);
 
         String errorConfirmEmailExp = "The confirmation email you have entered does not match. Please try again";
         String errorConfirmEmailAct = driver.findElement(By.id("validation-summary")).getText();
@@ -360,25 +374,25 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 
     @Test
     public void registerTermsNotChecked() {
-        driver.navigate().to((getBaseURL() + "/register"));
+        final String urlExpectedRegister = getBaseURL() + "/register";
+
+        driver.navigate().to(urlExpectedRegister);
 
         driver.findElement(By.name("firstName")).sendKeys("Andy");
         driver.findElement(By.name("surname")).sendKeys("Burdis");
         driver.findElement(By.name("email")).sendKeys("andy2@andy.com");
         driver.findElement(By.name("confirmEmail")).sendKeys("andy2@andy.com");
-        driver.findElement(By.name("password")).sendKeys("12345678");
-        driver.findElement(By.name("confirmPassword")).sendKeys("12345678");
+        driver.findElement(By.name("password")).sendKeys(password);
+        driver.findElement(By.name("confirmPassword")).sendKeys(password);
 
         // NOTE: We do not checkbox the terms
         //driver.findElement(By.id("tconditions")).click();
 
         driver.findElement(By.name("submitBtn")).click();
 
-        String urlExpectedLogin = getBaseURL() + "/login";
         String urlActual = driver.getCurrentUrl();
 
-        assertEquals(urlExpectedLogin, urlActual);
-        //assertTrue(urlActual.contains(urlExpectedLogin));
+        assertEquals(urlExpectedRegister, urlActual);
 
         String errorCheckTermsExp = "Please accept terms & conditions";
         String errorCheckTermsAct = driver.findElement(By.id("validation-summary")).getText();
@@ -388,7 +402,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 		
     @After
     public void myAfter(){
-        //driver.quit();
+        driver.quit();
     }
 
 	 private boolean isElementPresent(By by) {
@@ -399,4 +413,27 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
           return false;
         }
       }
+	 
+	private void saveTestUser() {
+		// save a user to database
+		MongoClient mongoClient = null;
+		try {
+			mongoClient = new MongoClient();
+		} catch (UnknownHostException e) {
+			fail(e.getMessage());
+		}
+		final DB db = mongoClient.getDB(TestConfigurations.testDBName());
+		final DBCollection users = db.getCollection("users");
+		
+		final long count = users.count(new BasicDBObject("_id", testEmail));
+		if (count == 0) {
+			final DBObject o = new BasicDBObject();
+			o.put("_id", testEmail);
+			o.put("password", password);
+			o.put("firstName", "Andy");
+			o.put("surname", "Burdis");
+			users.insert(o);
+		}
+	}
+	 
 }

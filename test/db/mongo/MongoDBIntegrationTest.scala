@@ -11,6 +11,6 @@ class MongoDBIntegrationTest extends FlatSpec with Matchers {
   "Mongo DB" should "connect to test database with test config" in 
   	new WithApplication(FakeApplication(additionalConfiguration = TestConfigurations.mongo)) {
 		// setup mongo test instance done through application
-	  	MongoDB().name shouldBe equal(TestConfigurations.mongo(MongoDB.KEY_DB))
+	  	MongoDB().name shouldBe TestConfigurations.testDBName
     }
 }

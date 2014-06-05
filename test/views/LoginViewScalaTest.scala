@@ -9,6 +9,8 @@ import org.jsoup.nodes.Document
 import util.JsoupUtils._
 import util.Implicits.string2Option
 import util.JsoupJavaUtils
+import play.api.test.FakeApplication
+import helper.TestSetup
  
 
 class LoginViewScalaTest extends FlatSpec with Matchers {
@@ -20,6 +22,8 @@ class LoginViewScalaTest extends FlatSpec with Matchers {
   
   "Login view" should "have the username and password fields" in {
     
+	play.mvc.Http.Context.current.set(TestSetup.testHttpContext())
+
 	implicit val doc = JsoupJavaUtils.renderView(login(form))
     
     assertFieldPresent(userName, "User name here")

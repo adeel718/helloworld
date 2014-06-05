@@ -4,12 +4,16 @@ import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.fakeGlobal;
 import static play.test.Helpers.inMemoryDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 
 import play.test.FakeApplication;
 import play.test.TestServer;
+import util.TestConfigurations;
 
 public class BaseSeleniumTest {
 
@@ -21,7 +25,10 @@ public class BaseSeleniumTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		app = fakeApplication(inMemoryDatabase(), fakeGlobal());
+		final Map<String, String> testConfig = new HashMap<>();
+		testConfig.putAll(inMemoryDatabase());
+		testConfig.putAll(TestConfigurations.mongoForJava());
+		app = fakeApplication(testConfig, fakeGlobal());
 		
 		// Start test HTTP server
 		testServer = new TestServer(9000, app);
