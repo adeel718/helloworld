@@ -19,7 +19,7 @@ class RegistrationDAOTest extends FunSuite with Matchers{
 
   test ("Create User Registration")
   {
-    running(FakeApplication){
+    running(FakeApplication()){
      val userRegistration = models.RegisteredUser(surname = "Sachin",
       firstName ="Tendulkar",
       email="100@sachin.com",

@@ -1,8 +1,9 @@
 package uk.gov.hmrc;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
@@ -10,13 +11,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
 import views.BaseSeleniumTest;
 import play.api.i18n.Messages;
 
 public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
+	DateFormat formatter; 
+	long d = new Date().getTime();
+	String testEmail = "andy@andy.com"+ d;
+	
     @Before
     public void myBefore(){
         driver = new FirefoxDriver();
@@ -190,9 +195,9 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
         String validationMsgConfirmPasswordAct = driver.findElement(By.id("errorconfirmPassword")).getText();
         assertEquals(validationMsgConfirmPasswordExp, validationMsgConfirmPasswordAct);
 
-        /*String validationMsgTermsExp = "Please accept terms & conditions";
+        String validationMsgTermsExp = "Please accept terms & conditions";
         String validationMsgTermsAct = driver.findElement(By.id("errortconditions")).getText();
-        assertEquals(validationMsgTermsExp, validationMsgTermsAct);*/
+        assertEquals(validationMsgTermsExp, validationMsgTermsAct);
     }
 
     @Test
@@ -212,9 +217,9 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
         driver.findElement(By.name("submitBtn")).click();
 
         urlActual = driver.getCurrentUrl();
-        String urlExpectedWelcome = getBaseURL() + "/welcome";
+        String urlExpectedWelcome = "welcome";
 
-        assertEquals(urlExpectedWelcome, urlActual);
+        assertTrue("Did not go to welcome page", urlActual.contains(urlExpectedWelcome));
         //assertTrue(urlActual.contains(urlExpectedWelcome));
     }
 
@@ -235,7 +240,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
         //assertTrue(urlActual.contains(urlExpectedLogin));
 
         String validationAct = driver.findElement(By.id("validation-summary")).getText();
-        String userNotFoundExp = "The username/password was not found. Please try again.";
+        String userNotFoundExp = "The entered username and/or password is not correct";
         assertTrue("Validation not found for No username in DB", validationAct.contains(userNotFoundExp));
 
     }
@@ -262,15 +267,14 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
         //assertTrue(urlActual.contains(urlExpectedWelcome));
 
         String validationAct = driver.findElement(By.id("validation-summary")).getText();
-        String passNotFoundExp = "The password was incorrect. Please try again.";
+        String passNotFoundExp = "The entered username and/or password is not correct";
         assertTrue("Validation not found: password incorrect", validationAct.contains(passNotFoundExp));
     }
 
     @Test
     public void registerSuccess() {
-        driver.navigate().to((getBaseURL() + "/login"));
-
-        driver.findElement(By.id("registerLink")).click();
+    	
+        driver.navigate().to((getBaseURL() + "/register"));
 
         String urlExpectedRegister = getBaseURL() + "/register";
         String urlActualRegister = driver.getCurrentUrl();
@@ -279,8 +283,8 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 
         driver.findElement(By.name("firstName")).sendKeys("Andy");
         driver.findElement(By.name("surname")).sendKeys("Burdis");
-        driver.findElement(By.name("email")).sendKeys("andy@andy.com");
-        driver.findElement(By.name("confirmEmail")).sendKeys("andy@andy.com");
+        driver.findElement(By.name("email")).sendKeys(testEmail);
+        driver.findElement(By.name("confirmEmail")).sendKeys(testEmail);
         driver.findElement(By.name("password")).sendKeys("12345678");
         driver.findElement(By.name("confirmPassword")).sendKeys("12345678");
 
@@ -306,8 +310,8 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 
         driver.findElement(By.name("firstName")).sendKeys("Andy");
         driver.findElement(By.name("surname")).sendKeys("Burdis");
-        driver.findElement(By.name("email")).sendKeys("andy@andy.com");
-        driver.findElement(By.name("confirmEmail")).sendKeys("andy@andy.com");
+        driver.findElement(By.name("email")).sendKeys(testEmail);
+        driver.findElement(By.name("confirmEmail")).sendKeys(testEmail);
         driver.findElement(By.name("password")).sendKeys("12345678");
         driver.findElement(By.name("confirmPassword")).sendKeys("passwordnotmatch");
 
@@ -333,7 +337,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 
         driver.findElement(By.name("firstName")).sendKeys("Andy");
         driver.findElement(By.name("surname")).sendKeys("Burdis");
-        driver.findElement(By.name("email")).sendKeys("andy@andy.com");
+        driver.findElement(By.name("email")).sendKeys(testEmail);
         driver.findElement(By.name("confirmEmail")).sendKeys("incorrect@email.com");
         driver.findElement(By.name("password")).sendKeys("12345678");
         driver.findElement(By.name("confirmPassword")).sendKeys("12345678");
@@ -384,8 +388,7 @@ public class RegistrationPageVerificationSeleniumTest extends BaseSeleniumTest {
 		
     @After
     public void myAfter(){
-        driver.quit();
-
+        //driver.quit();
     }
 
 	 private boolean isElementPresent(By by) {
