@@ -11,29 +11,15 @@ import play.api.Play
 import java.util.NoSuchElementException
 import com.mongodb.casbah.MongoClient
 import context._
+import models.RegisteredUser
 
 /**
  * Created by user02 on 6/3/14.
  */
 
-case class RegisteredUser (@Key("_id") email : String,
-                           firstName : String,
-                           surname : String,
-                           password : String)
 
 object RegistrationTestDBUtil extends SalatDAO[RegisteredUser, String](collection = MongoDB.collection("users")) {
 
 }
 
 
-object TestDB {
-
-  val KEY_DB = "mongo.db"
-
-  private lazy val dbname: String = "helloworld"
-  private lazy val client = MongoClient()
-  private lazy val db = client(dbname)
-
-  def apply() = db
-  def collection(col: String) = db(col)
-}

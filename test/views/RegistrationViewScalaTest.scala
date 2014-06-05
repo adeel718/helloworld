@@ -104,7 +104,7 @@ class RegistrationViewScalaTest extends FunSuite with Matchers {
 
         doc.select("#errorsurname").text should(include ("surname should not be empty Please enter."))
 
-        doc.select("#erroremail").text should(include ("email should not be empty Please enter valid email."))
+        doc.select("#erroremail").text should(include ("Email should not be empty Please enter valid email."))
         doc.select("#errorconfirmEmail").text should(include ("Please confirm email."))
         
         doc.select("#errorpassword").text should(include ("password should not be empty Please enter."))
