@@ -71,7 +71,7 @@ public class MainPageVerificationSeleniumTest extends BaseSeleniumTest {
 	     
 	     
 	     assertTrue(isElementPresent(By.xpath(".//*[@id='userName']")));
-	     assertTrue(isElementPresent(By.name("resetBtn")));
+	     assertTrue(isElementPresent(By.id("resetLink")));
 	     assertTrue(isElementPresent(By.name("submitBtn")));
 	      assertTrue(isElementPresent(By.className("info")));
 	      
