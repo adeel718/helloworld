@@ -35,6 +35,8 @@ publishArtifact in Test := false
 
 parallelExecution in Test := false
 
+Keys.fork in (Test) := false
+
 EclipseKeys.projectFlavor := EclipseProjectFlavor.Scala
 
 EclipseKeys.projectTransformerFactories := Seq[EclipseTransformerFactory[RewriteRule]]()
